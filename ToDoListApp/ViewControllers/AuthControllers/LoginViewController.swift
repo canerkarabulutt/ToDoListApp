@@ -42,9 +42,10 @@ class LoginViewController: UIViewController {
         button.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title3)
-        button.layer.cornerRadius = 12
-        button.isEnabled = false
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.layerStyle()
+        button.isEnabled = true
+        button.addTarget(self, action: #selector(handleLoginButton), for: .touchUpInside)
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         return button
     }()
     private lazy var containerGoRegister: UIView = {
@@ -95,6 +96,18 @@ extension LoginViewController {
     @objc private func handleGoRegister(_ sender: UIButton) {
         let vc = RegisterViewController()
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc private func handleLoginButton(_ sender: UIButton) {
+        guard let emailText = emailTexField.text else { return }
+        guard let passwordText = passwordTexField.text else { return }
+        
+        AuthService.loginUser(emailText: emailText, passwordText: passwordText) { result, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+            self.dismiss(animated: true)
+        }
     }
 }
 //MARK: - Helpers

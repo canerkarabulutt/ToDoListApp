@@ -16,7 +16,7 @@ class InputTextView: UITextView {
     }
     private let inputPlaceHolder: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.font = .systemFont(ofSize: 18, weight: .regular)
         label.textColor = .lightGray
         return label
     }()
@@ -24,8 +24,8 @@ class InputTextView: UITextView {
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         style()
+        layout()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -43,10 +43,10 @@ extension InputTextView {
         
         inputPlaceHolder.translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .white
-        font = UIFont.systemFont(ofSize: 20)
+        font = .systemFont(ofSize: 18, weight: .regular)
         layer.borderColor = UIColor.mainColor.cgColor
-        layer.borderWidth = 2
-        layer.cornerRadius = 10
+        layer.borderWidth = 3
+        layer.cornerRadius = 12
     }
     private func layout() {
         addSubview(inputPlaceHolder)
