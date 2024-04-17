@@ -159,7 +159,7 @@ extension TaskViewController {
     }
     private func configure() {
         guard let user = self.user else { return }
-        nameLabel.text = "Welcome \(user.name)"
+        nameLabel.text = "Welcome \(user.name),"
         fetchTasks()
     }
 }
@@ -177,7 +177,7 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.height/6
+        return view.frame.height/8
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 1

@@ -32,12 +32,6 @@ class TaskTableViewCell: UITableViewCell {
             self.timerLabel.text = self.formatTimeRemaining(timeRemaining)
         }
     }
-    private let taskLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .regular)
-        label.numberOfLines = 1
-        return label
-    }()
     private let taskHeaderLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .semibold)
@@ -81,7 +75,6 @@ class TaskTableViewCell: UITableViewCell {
         view.heightAnchor.constraint(equalToConstant: 2).isActive = true
         return view
     }()
-    private var stackView = UIStackView()
     //MARK: - Lifecyle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -93,8 +86,6 @@ class TaskTableViewCell: UITableViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        layer.cornerRadius = 16
-        layer.masksToBounds = true
         layer.borderWidth = 3
         layer.borderColor = UIColor.black.cgColor
     }
@@ -102,20 +93,16 @@ class TaskTableViewCell: UITableViewCell {
 //MARK: - Helpers
 extension TaskTableViewCell {
     private func setup() {
-        stackView = UIStackView(arrangedSubviews: [taskHeaderLabel, taskLabel])
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
         taskHeaderLabel.textAlignment = .center
-        taskLabel.textAlignment = .center
         calendarLabel.textAlignment = .right
+        taskHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
         calendarLabel.translatesAutoresizingMaskIntoConstraints = false
         endDateLabel.translatesAutoresizingMaskIntoConstraints = false
         timerLabel.translatesAutoresizingMaskIntoConstraints = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         separatorView.translatesAutoresizingMaskIntoConstraints = false
     }
     private func layout() {
-        addSubview(stackView)
+        addSubview(taskHeaderLabel)
         addSubview(calendarLabel)
         addSubview(separatorView)
         addSubview(endDateLabel)
@@ -123,34 +110,32 @@ extension TaskTableViewCell {
         
         NSLayoutConstraint.activate([
             
-            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            calendarLabel.topAnchor.constraint(equalTo: topAnchor, constant: 4),
+            calendarLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
+            
+            taskHeaderLabel.topAnchor.constraint(equalTo: calendarLabel.bottomAnchor, constant: 4),
+            taskHeaderLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -4),
             
             separatorView.leadingAnchor.constraint(equalTo: leadingAnchor),
             separatorView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            separatorView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 4),
-      
-            calendarLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 4),
-            calendarLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            calendarLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
+            separatorView.topAnchor.constraint(equalTo: taskHeaderLabel.bottomAnchor, constant: 16),
             
             endDateLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 4),
             endDateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            endDateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4),
+            endDateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6),
             
         ])
     }
     private func configure() {
         guard let task = self.task else { return }
-        taskLabel.text = task.text
-        taskHeaderLabel.text = task.header.uppercased()
+        let uniqueCharacter = "\u{1F4CC}"
+        taskHeaderLabel.text = uniqueCharacter + " " + (task.header.uppercased())
         if let selectedDate = task.calendar["selectedDate"] as? Timestamp {
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale(identifier: "en_US")
             dateFormatter.dateFormat = "MMM dd, yyyy"
             let dateString = dateFormatter.string(from: selectedDate.dateValue())
-            calendarLabel.text = "\(dateString)"
+            calendarLabel.text = "\u{1F4C6}\(dateString)"
         } else {
             calendarLabel.text = "No selected date"
         }

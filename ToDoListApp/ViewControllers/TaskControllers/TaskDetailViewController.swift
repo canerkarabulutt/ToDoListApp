@@ -49,7 +49,7 @@ extension TaskDetailViewController {
                     print("Error marking task as completed: \(error.localizedDescription)")
                 } else {
                     DispatchQueue.main.async {
-                        self?.delegate?.didDeleteTask() // Update task list in TaskViewController
+                        self?.delegate?.didDeleteTask()
                         self?.navigationController?.popViewController(animated: true)
                     }
                 }

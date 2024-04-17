@@ -11,7 +11,8 @@ class NewTaskViewController: UIViewController {
     //MARK: - Properties
     private let newTaskLabel: UILabel = {
         let label = UILabel()
-        label.attributedText = NSMutableAttributedString(string: "New Item", attributes: [.foregroundColor: UIColor.white, .font: UIFont.preferredFont(forTextStyle: .largeTitle)])
+        let attributedText = NSMutableAttributedString(string: "New Item", attributes: [.foregroundColor: UIColor.white, .font: UIFont.boldSystemFont(ofSize: 24)])
+        label.attributedText = attributedText
         label.textAlignment = .center
         return label
     }()
