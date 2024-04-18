@@ -50,10 +50,10 @@ class TimerManager {
             components.append("\(hours) hour")
         }
         if minutes > 0 && components.count < maxComponents {
-            components.append("\(minutes) minute")
+            components.append("\(minutes) min")
         }
         if seconds > 0 && components.count < maxComponents {
-            components.append("\(seconds) second")
+            components.append("\(seconds) sec")
         }
         return components.joined(separator: " ")
     }

@@ -13,7 +13,7 @@ class TaskDetailCollectionViewCell: UICollectionViewCell {
     //MARK: - Properties
     var task: TaskModel?
     private var timerManager = TimerManager.shared
-
+    
     private let taskHeaderLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 28, weight: .bold)
@@ -23,7 +23,7 @@ class TaskDetailCollectionViewCell: UICollectionViewCell {
     }()
     private let taskLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 22, weight: .semibold)
+        label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.numberOfLines = 0
         return label
     }()
@@ -59,8 +59,8 @@ class TaskDetailCollectionViewCell: UICollectionViewCell {
         let taskHeaderLabelSize = taskHeaderLabel.sizeThatFits(CGSize(width: contentView.frame.width - 40, height: CGFloat.greatestFiniteMagnitude))
         taskHeaderLabel.frame = CGRect(x: (contentView.frame.width - taskHeaderLabelSize.width) / 2, y: 24, width: taskHeaderLabelSize.width, height: taskHeaderLabelSize.height)
         
-        let taskLabelSize = taskLabel.sizeThatFits(CGSize(width: contentView.frame.width - 20, height: CGFloat.greatestFiniteMagnitude))
-        taskLabel.frame = CGRect(x: 20, y: taskHeaderLabel.bottom + 20, width: taskLabelSize.width, height: taskLabelSize.height)
+        let taskLabelSize = taskLabel.sizeThatFits(CGSize(width: contentView.frame.width - 64, height: CGFloat.greatestFiniteMagnitude))
+        taskLabel.frame = CGRect(x: 32, y: taskHeaderLabel.bottom + 20, width: taskLabelSize.width, height: taskLabelSize.height)
         
         let horizontalCenter = contentView.frame.width / 2
         
@@ -100,7 +100,7 @@ extension TaskDetailCollectionViewCell {
         if let endDate = task.endDate {
             endDateLabel.text = "Remaining Time: Calculating..."
             timerManager.startTimer(for: endDate, updateHandler: { [weak self] timeString in
-                self?.endDateLabel.text = "\u{23F0}Duration: \(timeString)"
+                self?.endDateLabel.text = "\u{23F3}Duration: \(timeString)"
             }, timeIsUpHandler: { [weak self] in
                 self?.endDateLabel.text = "Time is Up!"
             })

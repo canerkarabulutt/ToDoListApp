@@ -31,7 +31,6 @@ class TaskViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24, weight: .heavy)
         label.textColor = .white
-        label.text = ""
         return label
     }()
     private let taskTableView: UITableView = {
@@ -114,9 +113,11 @@ extension TaskViewController {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         profileButton.translatesAutoresizingMaskIntoConstraints = false
         addNewTaskButton.translatesAutoresizingMaskIntoConstraints = false
+        
         profileView.translatesAutoresizingMaskIntoConstraints = false
         profileView.layer.cornerRadius = 20
         profileView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        
         taskTableView.translatesAutoresizingMaskIntoConstraints = false
         taskTableView.delegate = self
         taskTableView.dataSource = self
@@ -139,7 +140,7 @@ extension TaskViewController {
             view.trailingAnchor.constraint(equalTo: addNewTaskButton.trailingAnchor, constant: 10),
             addNewTaskButton.heightAnchor.constraint(equalToConstant: 60),
             addNewTaskButton.widthAnchor.constraint(equalToConstant: 60),
-            
+                        
             taskTableView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 24),
             taskTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             taskTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),

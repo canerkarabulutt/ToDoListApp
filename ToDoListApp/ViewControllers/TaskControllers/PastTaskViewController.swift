@@ -12,6 +12,9 @@ import FirebaseFirestore
 class PastTaskViewController: UIViewController {
     //MARK: - Properties
     private var pastTasks: [TaskModel] = []
+    private var isSelectModeEnabled = false
+    private var selectedIndices: [IndexPath] = []
+    
     private let collectionView : UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { _, _ in
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
         item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
@@ -25,10 +28,38 @@ class PastTaskViewController: UIViewController {
         super.viewDidLoad()
         style()
         fetchPastTasks()
+        setupLongPressGesture()
+        selectButtonTapped()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = CGRect(x: 4, y: 0, width: view.width - 8, height: view.height - 8)
+    }
+}
+//MARK: - Selector
+extension PastTaskViewController {
+    @objc private func selectButtonTapped() {
+        
+    }
+    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else { return }
+
+        let touchPoint = gesture.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: touchPoint) else {
+            return
+        }
+        let taskToDelete = pastTasks[indexPath.row]
+        
+        let actionSheet = UIAlertController(title: "Remove", message: "Would you like to remove this task permanently?", preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+            self?.deletePastTask(at: indexPath.row)
+        }
+        actionSheet.addAction(deleteAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+        deleteAction.setValue(UIColor.purple, forKey: "titleTextColor")
+        cancelAction.setValue(UIColor.black, forKey: "titleTextColor")
+        present(actionSheet, animated: true, completion: nil)
     }
 }
 //MARK: - Service
@@ -39,6 +70,19 @@ extension PastTaskViewController {
             DispatchQueue.main.async {
                 self.pastTasks = pastTasks
                 self.collectionView.reloadData()
+            }
+        }
+    }
+    private func deletePastTask(at index: Int) {
+        let taskToDelete = pastTasks[index]
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("tasks").document(uid).collection("deleted_tasks").document(taskToDelete.taskId).delete { error in
+            if let error = error {
+                print("Error removing document: \(error)")
+            } else {
+                print("Document successfully removed from Firestore!")
+                self.pastTasks.remove(at: index)
+                self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
             }
         }
     }
@@ -53,6 +97,15 @@ extension PastTaskViewController {
         collectionView.dataSource = self
         collectionView.backgroundColor = .clear
         collectionView.register(PastTaskCollectionViewCell.self, forCellWithReuseIdentifier: PastTaskCollectionViewCell.cellIdentifier)
+    }
+    private func setupLongPressGesture() {
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        collectionView.addGestureRecognizer(longPressGesture)
+    }
+    private func selectButton() {
+        let selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectButtonTapped))
+        selectButton.tintColor = .white
+        navigationItem.rightBarButtonItem = selectButton
     }
 }
 //MARK: - UICollectionViewDelegate & UICollectionViewDataSource

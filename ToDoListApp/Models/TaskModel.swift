@@ -16,6 +16,7 @@ struct TaskModel {
     var endDate: Date?
     var isCompleted: Bool = false
     var startDate: Date
+    var isSelected: Bool
 
     init(data: [String: Any]) {
         self.header = data["header"] as? String ?? ""
@@ -29,7 +30,8 @@ struct TaskModel {
             self.endDate = nil
         }
         self.isCompleted = data["completed"] as? Bool ?? false
-        self.startDate = data["startDate"] as? Date ?? Date() // Yeni eklenen başlangıç tarihi alanı
+        self.startDate = data["startDate"] as? Date ?? Date()
+        self.isSelected = false
     }
     
     var dictionary: [String: Any] {

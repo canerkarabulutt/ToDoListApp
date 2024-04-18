@@ -22,7 +22,6 @@ class TaskTableViewCell: UITableViewCell {
         countdownTimer?.invalidate()
         countdownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
             guard let self = self else { return }
-
             let timeRemaining = endDate.timeIntervalSince(Date())
             guard timeRemaining > 0 else {
                 self.endDateLabel.text = "Time is up!"
@@ -121,7 +120,7 @@ extension TaskTableViewCell {
             separatorView.topAnchor.constraint(equalTo: taskHeaderLabel.bottomAnchor, constant: 16),
             
             endDateLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 4),
-            endDateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            endDateLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             endDateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6),
             
         ])
@@ -144,7 +143,7 @@ extension TaskTableViewCell {
             dateFormatter.locale = Locale(identifier: "en_US")
             dateFormatter.dateFormat = "MMM dd, yyyy"
             let endDateString = dateFormatter.string(from: endDate)
-            endDateLabel.text = "End Date: \(endDateString)"
+            endDateLabel.text = "\u{2705}End Date: \(endDateString)"
         } else {
             endDateLabel.text = "No end date"
         }

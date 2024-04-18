@@ -17,7 +17,7 @@ class MainTabBarViewController: UITabBarController {
         let vc3 = PastTaskViewController()
         
         vc1.title = "Tasks"
-        vc2.title = "Settings"
+        vc2.title = "Completed Tasks"
         vc3.title = "Past Tasks"
         
         vc1.navigationItem.largeTitleDisplayMode = .always
@@ -28,8 +28,8 @@ class MainTabBarViewController: UITabBarController {
         let nav2 = UINavigationController(rootViewController: vc2)
         let nav3 = UINavigationController(rootViewController: vc3)
         
-        nav1.tabBarItem = UITabBarItem(title: "Tasks", image: UIImage(systemName: "checkmark.circle"), tag: 1)
-        nav2.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), tag: 1)
+        nav1.tabBarItem = UITabBarItem(title: "Current", image: UIImage(systemName: "checkmark.circle"), tag: 1)
+        nav2.tabBarItem = UITabBarItem(title: "Completed", image: UIImage(systemName: "checkmark.circle.fill"), tag: 1)
         nav3.tabBarItem = UITabBarItem(title: "Past", image: UIImage(systemName: "clock.badge.checkmark"), tag: 1)
         
         nav1.navigationBar.prefersLargeTitles = true

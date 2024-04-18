@@ -50,7 +50,7 @@ class PastTaskCollectionViewCell: UICollectionViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        calendarLabel.frame = CGRect(x: 5, y: 2, width: contentView.height, height: contentView.height)
+        calendarLabel.frame = CGRect(x: 5, y: 2, width: contentView.height*1.25, height: contentView.height)
         taskHeaderLabel.frame = CGRect(x: calendarLabel.right+10, y: 2, width: contentView.width-calendarLabel.right-15, height: contentView.height/2)
         taskLabel.frame = CGRect(x: calendarLabel.right+10, y: taskHeaderLabel.bottom, width: contentView.width-calendarLabel.right-15, height: contentView.height/2)
         separatorView.frame = CGRect(x: calendarLabel.right+1, y: 0, width: 2, height: contentView.height)
