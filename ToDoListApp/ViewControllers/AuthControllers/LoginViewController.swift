@@ -9,6 +9,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     //MARK: - Properties
+    var viewModel = LoginViewModel()
     
     private let loginImageView : UIImageView = {
         let imageView = UIImageView()
@@ -17,7 +18,7 @@ class LoginViewController: UIViewController {
         return imageView
     }()
     private lazy var emailContainerView: UIView = {
-        let containerView = AuthInputView(image: UIImage(systemName: "envelope.fill")!, textField: emailTexField)
+        let containerView = AuthInputView(image: UIImage(systemName: "envelope.fill")!, textField: emailTextField)
         containerView.layerStyle()
         containerView.backgroundColor = .purple
         return containerView
@@ -28,7 +29,7 @@ class LoginViewController: UIViewController {
         containerView.backgroundColor = .purple
         return containerView
     }()
-    private let emailTexField: UITextField = {
+    private let emailTextField: UITextField = {
         let textField = TextFieldView(placeholder: "Email...")
         return textField
     }()
@@ -80,8 +81,6 @@ class LoginViewController: UIViewController {
         ])
         return view
     }()
-
-
     private var stackView = UIStackView()
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -98,7 +97,7 @@ extension LoginViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @objc private func handleLoginButton(_ sender: UIButton) {
-        guard let emailText = emailTexField.text else { return }
+        guard let emailText = emailTextField.text else { return }
         guard let passwordText = passwordTexField.text else { return }
         
         AuthService.loginUser(emailText: emailText, passwordText: passwordText) { result, error in
@@ -109,9 +108,26 @@ extension LoginViewController {
             self.dismiss(animated: true)
         }
     }
+    @objc private func handleTextField(_ sender: UITextField) {
+        if sender == emailTextField {
+            viewModel.emailText = sender.text
+        } else {
+            viewModel.passwordText = sender.text
+        }
+        loginButtonStatus()
+    }
 }
 //MARK: - Helpers
 extension LoginViewController {
+    private func loginButtonStatus() {
+        if let email = viewModel.emailText, let password = viewModel.passwordText, !email.isEmpty && !password.isEmpty {
+            logInButton.isEnabled = true
+            logInButton.backgroundColor = .purple
+        } else {
+            logInButton.isEnabled = false
+            logInButton.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        }
+    }
     private func style() {
         stackView = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, logInButton])
         stackView.axis = .vertical
@@ -119,6 +135,8 @@ extension LoginViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         loginImageView.translatesAutoresizingMaskIntoConstraints = false
         containerGoRegister.translatesAutoresizingMaskIntoConstraints = false
+        emailTextField.addTarget(self, action: #selector(handleTextField), for: .editingChanged)
+        passwordTexField.addTarget(self, action: #selector(handleTextField), for: .editingChanged)
     }
     private func layout() {
         view.addSubview(loginImageView)

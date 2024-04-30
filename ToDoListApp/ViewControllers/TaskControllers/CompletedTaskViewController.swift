@@ -68,7 +68,7 @@ extension CompletedTaskViewController: UICollectionViewDelegate, UICollectionVie
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        let selectedTask = completedTasks[indexPath.section]
+        let selectedTask = completedTasks[indexPath.row]
         let detailVC = TaskDetailViewController()
         detailVC.task = selectedTask
         navigationController?.pushViewController(detailVC, animated: true)

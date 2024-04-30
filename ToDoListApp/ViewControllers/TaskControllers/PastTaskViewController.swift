@@ -49,10 +49,12 @@ extension PastTaskViewController {
             return
         }
         let taskToDelete = pastTasks[indexPath.row]
-        
         let actionSheet = UIAlertController(title: "Remove", message: "Would you like to remove this task permanently?", preferredStyle: .actionSheet)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
-            self?.deletePastTask(at: indexPath.row)
+            DispatchQueue.main.async {
+                self?.deletePastTask(at: indexPath.row)
+                self?.collectionView.reloadData()
+            }
         }
         actionSheet.addAction(deleteAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -124,7 +126,7 @@ extension PastTaskViewController: UICollectionViewDelegate, UICollectionViewData
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        let selectedTask = pastTasks[indexPath.section]
+        let selectedTask = pastTasks[indexPath.row]
         let detailVC = TaskDetailViewController()
         detailVC.task = selectedTask
         navigationController?.pushViewController(detailVC, animated: true)

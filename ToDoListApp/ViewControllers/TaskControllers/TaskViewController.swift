@@ -117,6 +117,7 @@ extension TaskViewController {
         profileView.translatesAutoresizingMaskIntoConstraints = false
         profileView.layer.cornerRadius = 20
         profileView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        profileView.delegate = self
         
         taskTableView.translatesAutoresizingMaskIntoConstraints = false
         taskTableView.delegate = self
@@ -212,8 +213,24 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
+//MARK: - TaskDetailViewControllerDelegate
 extension TaskViewController: TaskDetailViewControllerDelegate {
     func didDeleteTask() {
         fetchTasks()
     }
 }
+//MARK: - ProfileViewDelegate
+extension TaskViewController: ProfileViewDelegate {
+    func signOutUser() {
+        do {
+            try Auth.auth().signOut()
+            let loginVC = LoginViewController()
+            let navController = UINavigationController(rootViewController: loginVC)
+            navController.modalPresentationStyle = .fullScreen
+            self.present(navController, animated: true, completion: nil)
+        } catch {
+            print("Error signing out: \(error.localizedDescription)")
+        }
+    }
+}
+

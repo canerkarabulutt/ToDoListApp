@@ -28,7 +28,7 @@ class MainTabBarViewController: UITabBarController {
         let nav2 = UINavigationController(rootViewController: vc2)
         let nav3 = UINavigationController(rootViewController: vc3)
         
-        nav1.tabBarItem = UITabBarItem(title: "Current", image: UIImage(systemName: "checkmark.circle"), tag: 1)
+        nav1.tabBarItem = UITabBarItem(title: "Current", image: UIImage(systemName: "checklist"), tag: 1)
         nav2.tabBarItem = UITabBarItem(title: "Completed", image: UIImage(systemName: "checkmark.circle.fill"), tag: 1)
         nav3.tabBarItem = UITabBarItem(title: "Past", image: UIImage(systemName: "clock.badge.checkmark"), tag: 1)
         
@@ -40,8 +40,11 @@ class MainTabBarViewController: UITabBarController {
         tabBarConfiguration()
         userStatus()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
     private func tabBarConfiguration() {
-
         self.tabBar.itemPositioning = .fill
         self.tabBar.backgroundColor = .secondarySystemBackground
         self.tabBar.tintColor = .darkGray

@@ -6,6 +6,11 @@
 //
 
 import UIKit
+import FirebaseAuth
+
+protocol ProfileViewDelegate: AnyObject {
+    func signOutUser()
+}
 
 class ProfileView: UIView {
     var user: UserModel? {
@@ -15,7 +20,9 @@ class ProfileView: UIView {
     }
     //MARK: - Properties
     private let gradient = CAGradientLayer()
-
+    
+    weak var delegate: ProfileViewDelegate?
+    
     private let profileImageView: UIImageView = {
         let image = UIImageView()
         image.clipsToBounds = true
@@ -43,7 +50,16 @@ class ProfileView: UIView {
         button.addTarget(self, action: #selector(handleSignOutButton), for: .touchUpInside)
         return button
     }()
-
+    private lazy var allTasksButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("All Tasks", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor = UIColor.black
+        button.layer.cornerRadius = 16
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        button.addTarget(self, action: #selector(handleAllTaskButton), for: .touchUpInside)
+        return button
+    }()
     //MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,15 +81,19 @@ class ProfileView: UIView {
 
         usernameLabel.sizeToFit()
         usernameLabel.frame = CGRect(x: 8, y: nameLabel.frame.maxY + 4, width: bounds.width - 16, height: profileImageSize / 2)
+        
         let buttonWidth = bounds.width/2
-
-        signOutButton.frame = CGRect(x: (bounds.width - buttonWidth) / 2, y: usernameLabel.bottom + 16, width: bounds.width/2, height: profileImageSize / 3)
+        allTasksButton.frame = CGRect(x: (bounds.width - buttonWidth) / 3, y: usernameLabel.bottom + 16, width: bounds.width/1.5, height: profileImageSize / 2)
+        signOutButton.frame = CGRect(x: (bounds.width - buttonWidth) / 2, y: allTasksButton.bottom + 24, width: bounds.width/2, height: profileImageSize / 3)
     }
 
 }
 //MARK: - Selector
 extension ProfileView {
     @objc private func handleSignOutButton(_ sender: UIButton) {
+        delegate?.signOutUser()
+    }
+    @objc private func handleAllTaskButton(_ sender: UIButton) {
         
     }
 }
@@ -92,6 +112,7 @@ extension ProfileView {
         addSubview(nameLabel)
         addSubview(usernameLabel)
         addSubview(signOutButton)
+        addSubview(allTasksButton)
     }
     private func attributedTitle(headerTitle: String, title: String) -> NSMutableAttributedString {
         let attributed = NSMutableAttributedString(string: "\(headerTitle): ", attributes: [.foregroundColor: UIColor.white.withAlphaComponent(0.9), .font: UIFont.systemFont(ofSize: 16, weight: .bold)])
@@ -102,6 +123,5 @@ extension ProfileView {
         guard let user = self.user else { return }
         self.usernameLabel.attributedText = attributedTitle(headerTitle: "Username", title: "\(user.username)")
         self.nameLabel.attributedText = attributedTitle(headerTitle: "Name", title: "\(user.name)")
-        
     }
 }
