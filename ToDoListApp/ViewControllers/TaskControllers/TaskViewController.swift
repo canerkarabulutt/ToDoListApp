@@ -167,27 +167,21 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Move to Overdue") { (action, view, completionHandler) in
-            // Seçilen taskı al
             let taskToMove = self.tasks[indexPath.section]
             
-            // Task'ı OverdueTaskViewController'a taşı
             TaskService.moveTaskToOverdue(task: taskToMove) { error in
                 if let error = error {
                     print("Error moving task to Overdue: \(error.localizedDescription)")
                 } else {
-                    // Başarılı bir şekilde taşındıysa, TaskViewController'dan sil
                     self.tasks.remove(at: indexPath.section)
                     tableView.deleteSections(IndexSet(arrayLiteral: indexPath.section), with: .fade)
                 }
             }
             completionHandler(true)
         }
-        
-        action.backgroundColor = .orange // İstediğin arka plan rengini ayarla
-        
+        action.backgroundColor = .orange
         let configuration = UISwipeActionsConfiguration(actions: [action])
-        configuration.performsFirstActionWithFullSwipe = false // İlk eylemin tam olarak kaydırılmasını gerektirmez
-        
+        configuration.performsFirstActionWithFullSwipe = false
         return configuration
     }
 
