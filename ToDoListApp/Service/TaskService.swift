@@ -10,9 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct TaskService {
-    
-    static private var pastTasks = [TaskModel]()
-    
+        
     static func sendItem(taskText: String, headerText: String, calendar: [String : Any],endDate: Date?, completion: @escaping (Error?) -> Void) {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         let taskID = NSUUID().uuidString
@@ -95,6 +93,7 @@ struct TaskService {
         }
     }
     static func fetchCompletedTasks(uid: String, completion: @escaping ([TaskModel]) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("tasks").document(uid).collection("completed_tasks").order(by: "timestamp", descending: true).addSnapshotListener { snapshot, error in
             var completedTasks = [TaskModel]()
             if let documents = snapshot?.documents {
@@ -104,6 +103,31 @@ struct TaskService {
                 }
             }
             completion(completedTasks)
+        }
+    }
+    static func moveTaskToOverdue(task: TaskModel, completion: @escaping (Error?) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("tasks").document(uid).collection("overdue_tasks").document(task.taskId).setData(task.dictionary) { error in
+            if let error = error {
+                completion(error)
+                return
+            }
+            Firestore.firestore().collection("tasks").document(uid).collection("ongoing_tasks").document(task.taskId).delete { error in
+                completion(error)
+            }
+        }
+    }
+    static func fetchOverdueTasks(uid: String, completion: @escaping ([TaskModel]) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("tasks").document(uid).collection("overdue_tasks").order(by: "timestamp", descending: false).addSnapshotListener { snapshot, error in
+            var overdueTasks = [TaskModel]()
+            if let documents = snapshot?.documents {
+                documents.forEach { document in
+                    let data = document.data()
+                    overdueTasks.append(TaskModel(data: data))
+                }
+            }
+            completion(overdueTasks)
         }
     }
 }

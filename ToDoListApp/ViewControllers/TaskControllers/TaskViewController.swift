@@ -16,23 +16,7 @@ class TaskViewController: UIViewController {
         }
     }
     private var tasks: [TaskModel] = []
-    private let profileView = ProfileView()
-    private var isProfileViewActive: Bool = false
     
-    private lazy var profileButton: UIButton = {
-        let button = UIButton(type: .system)
-        let image = UIImage(systemName: "person.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .bold))
-        button.setImage(image, for: .normal)
-        button.tintColor = .white
-        button.addTarget(self, action: #selector(didTapProfile), for: .touchUpInside)
-        return button
-    }()
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 24, weight: .heavy)
-        label.textColor = .white
-        return label
-    }()
     private let taskTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         return tableView
@@ -53,10 +37,6 @@ class TaskViewController: UIViewController {
         layout()
         fetchUser()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
-    }
 }
 //MARK: - Service
 extension TaskViewController {
@@ -74,7 +54,6 @@ extension TaskViewController {
         TaskService.fetchUser(uid: uid) { user in
             self.user = user
             self.fetchTasks()
-            self.profileView.user = user
         }
     }
 }
@@ -94,30 +73,19 @@ extension TaskViewController {
         self.fetchTasks()
         self.taskTableView.reloadData()
     }
-    @objc private func didTapProfile(_ sender: UIBarButtonItem) {
-        UIView.animate(withDuration: 0.5) {
-            if self.isProfileViewActive {
-                self.profileView.frame.origin.x = self.view.frame.width
-            } else {
-                self.profileView.frame.origin.x = self.view.frame.width * 0.4
-            }
-        }
-        self.isProfileViewActive.toggle()
+    @objc private func handleBackButton(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
     }
 }
 //MARK: - Helpers
 extension TaskViewController {
     private func style() {
+        title = "Current Tasks"
         backgroundGradientColor()
-        self.navigationController?.navigationBar.isHidden = true
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        profileButton.translatesAutoresizingMaskIntoConstraints = false
+        self.navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.tintColor = .white
         addNewTaskButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        profileView.translatesAutoresizingMaskIntoConstraints = false
-        profileView.layer.cornerRadius = 20
-        profileView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-        profileView.delegate = self
         
         taskTableView.translatesAutoresizingMaskIntoConstraints = false
         taskTableView.delegate = self
@@ -128,40 +96,24 @@ extension TaskViewController {
     private func layout() {
         view.addSubview(addNewTaskButton)
         view.addSubview(taskTableView)
-        view.addSubview(nameLabel)
-        view.addSubview(profileButton)
-        view.addSubview(profileView)
         
         NSLayoutConstraint.activate([
-            profileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            profileButton.bottomAnchor.constraint(equalTo: taskTableView.topAnchor, constant: -16),
-            profileButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: addNewTaskButton.bottomAnchor, constant: 30),
             view.trailingAnchor.constraint(equalTo: addNewTaskButton.trailingAnchor, constant: 10),
             addNewTaskButton.heightAnchor.constraint(equalToConstant: 60),
             addNewTaskButton.widthAnchor.constraint(equalToConstant: 60),
                         
-            taskTableView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 24),
+            taskTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             taskTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             taskTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: taskTableView.bottomAnchor, constant: 14),
             
-            nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            
-            profileView.topAnchor.constraint(equalTo: profileButton.topAnchor, constant: 48),
-            profileView.leadingAnchor.constraint(equalTo: view.trailingAnchor),
-            profileView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            profileView.widthAnchor.constraint(equalToConstant: view.frame.width * 0.6)
-            
         ])
         view.bringSubviewToFront(addNewTaskButton)
-        view.bringSubviewToFront(profileView)
     }
     private func configure() {
-        guard let user = self.user else { return }
-        nameLabel.text = "Welcome \(user.name),"
+     //   guard let user = self.user else { return }
         fetchTasks()
     }
 }
@@ -175,7 +127,8 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = taskTableView.dequeueReusableCell(withIdentifier: TaskTableViewCell.cellIdentifier, for: indexPath) as? TaskTableViewCell else { return UITableViewCell() }
-        cell.task = tasks[indexPath.section]
+        let viewModel = TaskCellViewModel(task: tasks[indexPath.section])
+        cell.configure(with: viewModel)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -212,6 +165,32 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .normal, title: "Move to Overdue") { (action, view, completionHandler) in
+            // Seçilen taskı al
+            let taskToMove = self.tasks[indexPath.section]
+            
+            // Task'ı OverdueTaskViewController'a taşı
+            TaskService.moveTaskToOverdue(task: taskToMove) { error in
+                if let error = error {
+                    print("Error moving task to Overdue: \(error.localizedDescription)")
+                } else {
+                    // Başarılı bir şekilde taşındıysa, TaskViewController'dan sil
+                    self.tasks.remove(at: indexPath.section)
+                    tableView.deleteSections(IndexSet(arrayLiteral: indexPath.section), with: .fade)
+                }
+            }
+            completionHandler(true)
+        }
+        
+        action.backgroundColor = .orange // İstediğin arka plan rengini ayarla
+        
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        configuration.performsFirstActionWithFullSwipe = false // İlk eylemin tam olarak kaydırılmasını gerektirmez
+        
+        return configuration
+    }
+
 }
 //MARK: - TaskDetailViewControllerDelegate
 extension TaskViewController: TaskDetailViewControllerDelegate {
@@ -219,18 +198,3 @@ extension TaskViewController: TaskDetailViewControllerDelegate {
         fetchTasks()
     }
 }
-//MARK: - ProfileViewDelegate
-extension TaskViewController: ProfileViewDelegate {
-    func signOutUser() {
-        do {
-            try Auth.auth().signOut()
-            let loginVC = LoginViewController()
-            let navController = UINavigationController(rootViewController: loginVC)
-            navController.modalPresentationStyle = .fullScreen
-            self.present(navController, animated: true, completion: nil)
-        } catch {
-            print("Error signing out: \(error.localizedDescription)")
-        }
-    }
-}
-

@@ -13,7 +13,10 @@ class TaskTableViewCell: UITableViewCell {
     //MARK: - Properties
     var task: TaskModel? {
         didSet {
-            configure()
+            if let task = task {
+                let viewModel = TaskCellViewModel(task: task)
+                configure(with: viewModel)
+            }
         }
     }
     private var countdownTimer: Timer?
@@ -125,27 +128,36 @@ extension TaskTableViewCell {
             
         ])
     }
-    private func configure() {
-        guard let task = self.task else { return }
-        let uniqueCharacter = "\u{1F4CC}"
-        taskHeaderLabel.text = uniqueCharacter + " " + (task.header.uppercased())
-        if let selectedDate = task.calendar["selectedDate"] as? Timestamp {
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "en_US")
-            dateFormatter.dateFormat = "MMM dd, yyyy"
-            let dateString = dateFormatter.string(from: selectedDate.dateValue())
-            calendarLabel.text = "\u{1F4C6}\(dateString)"
+    public func configure(with viewModel: TaskCellViewModel) {
+        taskHeaderLabel.text = viewModel.taskHeader
+        calendarLabel.text = viewModel.calendarLabelText
+        endDateLabel.text = viewModel.endDateLabelText
+        
+        if viewModel.isExpired {
+            addExclamationMark()
         } else {
-            calendarLabel.text = "No selected date"
+            removeExclamationMark()
         }
-        if let endDate = task.endDate {
-            let dateFormatter = DateFormatter()
-            dateFormatter.locale = Locale(identifier: "en_US")
-            dateFormatter.dateFormat = "MMM dd, yyyy"
-            let endDateString = dateFormatter.string(from: endDate)
-            endDateLabel.text = "\u{2705}End Date: \(endDateString)"
-        } else {
-            endDateLabel.text = "No end date"
+    }
+    private func addExclamationMark() {
+        let exclamationImageView = UIImageView(image: UIImage(systemName: "exclamationmark.circle.fill"))
+        exclamationImageView.tintColor = .red
+        exclamationImageView.tag = 100
+        addSubview(exclamationImageView)
+        exclamationImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            exclamationImageView.topAnchor.constraint(equalTo: topAnchor, constant: 4),
+            exclamationImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            exclamationImageView.widthAnchor.constraint(equalToConstant: 20),
+            exclamationImageView.heightAnchor.constraint(equalToConstant: 20)
+        ])
+    }
+    private func removeExclamationMark() {
+        if let exclamationView = viewWithTag(100) {
+            exclamationView.removeFromSuperview()
         }
+    }
+    private func isTaskExpired(_ endDate: Date) -> Bool {
+        return endDate < Date()
     }
 }

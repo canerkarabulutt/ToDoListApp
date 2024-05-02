@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B1058A42BE3A482008595FB /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058A32BE3A482008595FB /* StatusViewController.swift */; };
+		2B1058AB2BE3A6E2008595FB /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 2B1058AA2BE3A6E2008595FB /* DGCharts */; };
+		2B1058AD2BE3ACDE008595FB /* StatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058AC2BE3ACDE008595FB /* StatusModel.swift */; };
+		2B1058AF2BE3B26D008595FB /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058AE2BE3B26D008595FB /* StatusView.swift */; };
+		2B1058B12BE3B330008595FB /* StatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058B02BE3B330008595FB /* StatusViewModel.swift */; };
+		2B1058B32BE3B6EB008595FB /* OverdueTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058B22BE3B6EB008595FB /* OverdueTaskViewController.swift */; };
+		2B1058B52BE3B771008595FB /* OverdueTaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058B42BE3B771008595FB /* OverdueTaskCollectionViewCell.swift */; };
+		2B1058B72BE42FCA008595FB /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058B62BE42FCA008595FB /* TaskCellViewModel.swift */; };
 		2B850EE02BCFD5DE0064B3C0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2B850EDF2BCFD5DE0064B3C0 /* FirebaseAuth */; };
 		2B850EE22BCFD5E40064B3C0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2B850EE12BCFD5E40064B3C0 /* FirebaseFirestore */; };
 		2B850EE42BCFD5EA0064B3C0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2B850EE32BCFD5EA0064B3C0 /* FirebaseStorage */; };
@@ -21,7 +29,7 @@
 		2B850F172BCFD6C60064B3C0 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B850EF12BCFD6C60064B3C0 /* NewTaskViewController.swift */; };
 		2B850F182BCFD6C60064B3C0 /* PastTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B850EF22BCFD6C60064B3C0 /* PastTaskViewController.swift */; };
 		2B850F192BCFD6C60064B3C0 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B850EF32BCFD6C60064B3C0 /* RegisterViewController.swift */; };
-		2B850F1A2BCFD6C60064B3C0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B850EF42BCFD6C60064B3C0 /* SettingsViewController.swift */; };
+		2B850F1A2BCFD6C60064B3C0 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B850EF42BCFD6C60064B3C0 /* ListViewController.swift */; };
 		2B850F1B2BCFD6C60064B3C0 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B850EF52BCFD6C60064B3C0 /* TaskDetailViewController.swift */; };
 		2B850F1C2BCFD6C60064B3C0 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B850EF62BCFD6C60064B3C0 /* TaskViewController.swift */; };
 		2B850F1D2BCFD6C60064B3C0 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B850EF82BCFD6C60064B3C0 /* RegisterViewModel.swift */; };
@@ -43,9 +51,18 @@
 		2B850F312BCFD8100064B3C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B850F302BCFD8100064B3C0 /* GoogleService-Info.plist */; };
 		2B850F332BCFDA600064B3C0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B850F322BCFDA600064B3C0 /* Extensions.swift */; };
 		2BD038A12BE11E6A0085937C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD038A02BE11E6A0085937C /* LoginViewModel.swift */; };
+		2BD038A32BE16C560085937C /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD038A22BE16C560085937C /* SettingsModel.swift */; };
+		2BD038A72BE2BCEF0085937C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD038A62BE2BCEF0085937C /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B1058A32BE3A482008595FB /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		2B1058AC2BE3ACDE008595FB /* StatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusModel.swift; sourceTree = "<group>"; };
+		2B1058AE2BE3B26D008595FB /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
+		2B1058B02BE3B330008595FB /* StatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewModel.swift; sourceTree = "<group>"; };
+		2B1058B22BE3B6EB008595FB /* OverdueTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueTaskViewController.swift; sourceTree = "<group>"; };
+		2B1058B42BE3B771008595FB /* OverdueTaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueTaskCollectionViewCell.swift; sourceTree = "<group>"; };
+		2B1058B62BE42FCA008595FB /* TaskCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellViewModel.swift; sourceTree = "<group>"; };
 		2B1DB4C42BAD865B0040DF54 /* ToDoListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B850EE62BCFD6C60064B3C0 /* TimerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		2B850EE82BCFD6C60064B3C0 /* TaskModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
@@ -58,7 +75,7 @@
 		2B850EF12BCFD6C60064B3C0 /* NewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		2B850EF22BCFD6C60064B3C0 /* PastTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastTaskViewController.swift; sourceTree = "<group>"; };
 		2B850EF32BCFD6C60064B3C0 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		2B850EF42BCFD6C60064B3C0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		2B850EF42BCFD6C60064B3C0 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		2B850EF52BCFD6C60064B3C0 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		2B850EF62BCFD6C60064B3C0 /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		2B850EF82BCFD6C60064B3C0 /* RegisterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
@@ -81,6 +98,8 @@
 		2B850F302BCFD8100064B3C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2B850F322BCFDA600064B3C0 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = ../../../../../Downloads/ToDoListApp/ToDoListApp/Extensions/Extensions.swift; sourceTree = "<group>"; };
 		2BD038A02BE11E6A0085937C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		2BD038A22BE16C560085937C /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		2BD038A62BE2BCEF0085937C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B1058AB2BE3A6E2008595FB /* DGCharts in Frameworks */,
 				2B850EE02BCFD5DE0064B3C0 /* FirebaseAuth in Frameworks */,
 				2B850EE22BCFD5E40064B3C0 /* FirebaseFirestore in Frameworks */,
 				2B850EE42BCFD5EA0064B3C0 /* FirebaseStorage in Frameworks */,
@@ -142,6 +162,8 @@
 			children = (
 				2B850EE82BCFD6C60064B3C0 /* TaskModel.swift */,
 				2B850EE92BCFD6C60064B3C0 /* UserModel.swift */,
+				2BD038A22BE16C560085937C /* SettingsModel.swift */,
+				2B1058AC2BE3ACDE008595FB /* StatusModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -161,7 +183,6 @@
 				2B850F352BCFE3490064B3C0 /* TaskControllers */,
 				2B850F342BCFE3160064B3C0 /* AuthControllers */,
 				2B850EF02BCFD6C60064B3C0 /* MainTabBarViewController.swift */,
-				2B850EF42BCFD6C60064B3C0 /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -171,6 +192,8 @@
 			children = (
 				2B850EF82BCFD6C60064B3C0 /* RegisterViewModel.swift */,
 				2BD038A02BE11E6A0085937C /* LoginViewModel.swift */,
+				2B1058B62BE42FCA008595FB /* TaskCellViewModel.swift */,
+				2B1058B02BE3B330008595FB /* StatusViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -196,7 +219,9 @@
 				2B850F032BCFD6C60064B3C0 /* TaskDetailCollectionViewCell.swift */,
 				2B850F002BCFD6C60064B3C0 /* CompletedTaskCollectionViewCell.swift */,
 				2B850F012BCFD6C60064B3C0 /* PastTaskCollectionViewCell.swift */,
+				2B1058B42BE3B771008595FB /* OverdueTaskCollectionViewCell.swift */,
 				2B850F022BCFD6C60064B3C0 /* ProfileView.swift */,
+				2B1058AE2BE3B26D008595FB /* StatusView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -233,11 +258,15 @@
 		2B850F352BCFE3490064B3C0 /* TaskControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2BD038A62BE2BCEF0085937C /* HomeViewController.swift */,
+				2B850EF42BCFD6C60064B3C0 /* ListViewController.swift */,
 				2B850EF62BCFD6C60064B3C0 /* TaskViewController.swift */,
 				2B850EF52BCFD6C60064B3C0 /* TaskDetailViewController.swift */,
 				2B850EF12BCFD6C60064B3C0 /* NewTaskViewController.swift */,
 				2B850EEE2BCFD6C60064B3C0 /* CompletedTaskViewController.swift */,
 				2B850EF22BCFD6C60064B3C0 /* PastTaskViewController.swift */,
+				2B1058B22BE3B6EB008595FB /* OverdueTaskViewController.swift */,
+				2B1058A32BE3A482008595FB /* StatusViewController.swift */,
 			);
 			path = TaskControllers;
 			sourceTree = "<group>";
@@ -262,6 +291,7 @@
 				2B850EDF2BCFD5DE0064B3C0 /* FirebaseAuth */,
 				2B850EE12BCFD5E40064B3C0 /* FirebaseFirestore */,
 				2B850EE32BCFD5EA0064B3C0 /* FirebaseStorage */,
+				2B1058AA2BE3A6E2008595FB /* DGCharts */,
 			);
 			productName = ToDoListApp;
 			productReference = 2B1DB4C42BAD865B0040DF54 /* ToDoListApp.app */;
@@ -293,6 +323,7 @@
 			mainGroup = 2B1DB4BB2BAD865B0040DF54;
 			packageReferences = (
 				2B850EDD2BCFD2F70064B3C0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				2B1058A52BE3A5FB008595FB /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 2B1DB4C52BAD865B0040DF54 /* Products */;
 			projectDirPath = "";
@@ -325,7 +356,9 @@
 				2B850F1F2BCFD6C60064B3C0 /* HeaderTextView.swift in Sources */,
 				2B850F1E2BCFD6C60064B3C0 /* CalendarView.swift in Sources */,
 				2B850F282BCFD6C60064B3C0 /* TextFieldView.swift in Sources */,
+				2B1058AF2BE3B26D008595FB /* StatusView.swift in Sources */,
 				2B850F172BCFD6C60064B3C0 /* NewTaskViewController.swift in Sources */,
+				2B1058AD2BE3ACDE008595FB /* StatusModel.swift in Sources */,
 				2B850F2E2BCFD6C60064B3C0 /* SceneDelegate.swift in Sources */,
 				2B850F262BCFD6C60064B3C0 /* TaskDetailCollectionViewCell.swift in Sources */,
 				2B850F332BCFDA600064B3C0 /* Extensions.swift in Sources */,
@@ -335,11 +368,15 @@
 				2B850F102BCFD6C60064B3C0 /* TaskModel.swift in Sources */,
 				2B850F1D2BCFD6C60064B3C0 /* RegisterViewModel.swift in Sources */,
 				2B850F142BCFD6C60064B3C0 /* CompletedTaskViewController.swift in Sources */,
+				2B1058B12BE3B330008595FB /* StatusViewModel.swift in Sources */,
+				2BD038A32BE16C560085937C /* SettingsModel.swift in Sources */,
 				2B850F0F2BCFD6C60064B3C0 /* TimerManager.swift in Sources */,
+				2B1058B72BE42FCA008595FB /* TaskCellViewModel.swift in Sources */,
 				2B850F122BCFD6C60064B3C0 /* AuthService.swift in Sources */,
 				2B850F202BCFD6C60064B3C0 /* InputTextView.swift in Sources */,
-				2B850F1A2BCFD6C60064B3C0 /* SettingsViewController.swift in Sources */,
+				2B850F1A2BCFD6C60064B3C0 /* ListViewController.swift in Sources */,
 				2B850F162BCFD6C60064B3C0 /* MainTabBarViewController.swift in Sources */,
+				2B1058B32BE3B6EB008595FB /* OverdueTaskViewController.swift in Sources */,
 				2B850F212BCFD6C60064B3C0 /* TaskCompletedCalendarView.swift in Sources */,
 				2B850F292BCFD6C60064B3C0 /* AppDelegate.swift in Sources */,
 				2B850F112BCFD6C60064B3C0 /* UserModel.swift in Sources */,
@@ -347,9 +384,12 @@
 				2B850F1C2BCFD6C60064B3C0 /* TaskViewController.swift in Sources */,
 				2B850F232BCFD6C60064B3C0 /* CompletedTaskCollectionViewCell.swift in Sources */,
 				2B850F152BCFD6C60064B3C0 /* LoginViewController.swift in Sources */,
+				2BD038A72BE2BCEF0085937C /* HomeViewController.swift in Sources */,
+				2B1058B52BE3B771008595FB /* OverdueTaskCollectionViewCell.swift in Sources */,
 				2B850F252BCFD6C60064B3C0 /* ProfileView.swift in Sources */,
 				2B850F222BCFD6C60064B3C0 /* AuthInputView.swift in Sources */,
 				2B850F242BCFD6C60064B3C0 /* PastTaskCollectionViewCell.swift in Sources */,
+				2B1058A42BE3A482008595FB /* StatusViewController.swift in Sources */,
 				2B850F192BCFD6C60064B3C0 /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -560,6 +600,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2B1058A52BE3A5FB008595FB /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
 		2B850EDD2BCFD2F70064B3C0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -571,6 +619,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2B1058AA2BE3A6E2008595FB /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B1058A52BE3A5FB008595FB /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
 		2B850EDF2BCFD5DE0064B3C0 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2B850EDD2BCFD2F70064B3C0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

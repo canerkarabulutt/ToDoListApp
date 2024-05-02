@@ -12,31 +12,31 @@ import FirebaseAuth
 class MainTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        let vc1 = TaskViewController()
-        let vc2 = CompletedTaskViewController()
-        let vc3 = PastTaskViewController()
+        let vc1 = HomeViewController()
+        let vc2 = StatusViewController()
+     //   let vc3 = PastTaskViewController()
         
-        vc1.title = "Tasks"
-        vc2.title = "Completed Tasks"
-        vc3.title = "Past Tasks"
+     //   vc1.title = "Tasks"
+        vc2.title = "Settings"
+     //   vc3.title = "Past Tasks"
         
-        vc1.navigationItem.largeTitleDisplayMode = .always
+      //  vc1.navigationItem.largeTitleDisplayMode = .always
         vc2.navigationItem.largeTitleDisplayMode = .always
-        vc3.navigationItem.largeTitleDisplayMode = .always
+     //   vc3.navigationItem.largeTitleDisplayMode = .always
         
         let nav1 = UINavigationController(rootViewController: vc1)
         let nav2 = UINavigationController(rootViewController: vc2)
-        let nav3 = UINavigationController(rootViewController: vc3)
+   //     let nav3 = UINavigationController(rootViewController: vc3)
         
         nav1.tabBarItem = UITabBarItem(title: "Current", image: UIImage(systemName: "checklist"), tag: 1)
-        nav2.tabBarItem = UITabBarItem(title: "Completed", image: UIImage(systemName: "checkmark.circle.fill"), tag: 1)
-        nav3.tabBarItem = UITabBarItem(title: "Past", image: UIImage(systemName: "clock.badge.checkmark"), tag: 1)
+        nav2.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "checkmark.circle.fill"), tag: 1)
+    //    nav3.tabBarItem = UITabBarItem(title: "Past", image: UIImage(systemName: "clock.badge.checkmark"), tag: 1)
         
         nav1.navigationBar.prefersLargeTitles = true
         nav2.navigationBar.prefersLargeTitles = true
-        nav3.navigationBar.prefersLargeTitles = true
+   //     nav3.navigationBar.prefersLargeTitles = true
         
-        setViewControllers([nav1, nav2, nav3], animated: false)
+        setViewControllers([nav1, nav2], animated: false)
         tabBarConfiguration()
         userStatus()
     }

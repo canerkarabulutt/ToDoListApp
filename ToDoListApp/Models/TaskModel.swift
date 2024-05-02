@@ -43,7 +43,7 @@ struct TaskModel {
             "calendar": calendar,
             "endDate": endDate ?? 0,
             "completed": isCompleted,
-            "startDate": startDate // Yeni eklenen başlangıç tarihi alanı
+            "startDate": startDate
         ]
     }
 }
