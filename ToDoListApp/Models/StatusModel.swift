@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TaskStatistics {
+struct TaskStatus {
     var ongoingTasks: Int
     var overdueTasks: Int
     var completedTasks: Int

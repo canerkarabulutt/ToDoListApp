@@ -13,11 +13,11 @@ class MainTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let vc1 = HomeViewController()
-        let vc2 = StatusViewController()
+        let vc2 = SettingsViewController()
      //   let vc3 = PastTaskViewController()
         
      //   vc1.title = "Tasks"
-        vc2.title = "Settings"
+      //  vc2.title = "Settings"
      //   vc3.title = "Past Tasks"
         
       //  vc1.navigationItem.largeTitleDisplayMode = .always

@@ -38,7 +38,7 @@ class CompletedTaskCollectionViewCell: UICollectionViewCell {
     private lazy var checkMarkButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-        button.backgroundColor = .black
+        button.backgroundColor = .systemGreen
         button.layer.borderColor = UIColor.black.cgColor
         button.tintColor = .white
         return button

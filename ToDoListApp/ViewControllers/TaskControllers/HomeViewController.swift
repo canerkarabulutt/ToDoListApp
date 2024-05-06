@@ -80,7 +80,8 @@ extension HomeViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc private func handleStatusButton(_ sender: UIButton) {
-        
+        let vc = StatusViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 //MARK: - Service

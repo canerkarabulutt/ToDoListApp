@@ -8,35 +8,39 @@
 import Foundation
 import UIKit
 import DGCharts
+import FirebaseAuth
 
 class StatusViewModel {
-    private var taskStatistics: TaskStatistics
-    
-    init(taskStatistics: TaskStatistics) {
-        self.taskStatistics = taskStatistics
+    private var taskStatistics: TaskStatus?
+    private var chartDataSet: PieChartDataSet?
+
+    func getTaskStatistics() -> TaskStatus? {
+        return taskStatistics
     }
-    
-    var successRate: String {
-        let totalTasks = Double(taskStatistics.ongoingTasks + taskStatistics.overdueTasks + taskStatistics.completedTasks + taskStatistics.deletedTasks)
-        let completedPercentage = Double(taskStatistics.completedTasks) / totalTasks * 100.0
-        return String(format: "%.1f", completedPercentage)
+
+    func getChartDataSet() -> PieChartDataSet? {
+        return chartDataSet
     }
-    
-    func generateChartData() -> PieChartDataSet {
+
+    func updateTaskStatistics(completedTasksCount: Int, ongoingTasksCount: Int, overdueTasksCount: Int, pastTasksCount: Int) {
+        taskStatistics = TaskStatus(ongoingTasks: ongoingTasksCount, overdueTasks: overdueTasksCount, completedTasks: completedTasksCount, deletedTasks: 0)
+        chartDataSet = generateChartData(completedTasksCount: completedTasksCount, overdueTasksCount: overdueTasksCount, pastTasksCount: pastTasksCount, ongoingTasksCount: ongoingTasksCount)
+    }
+
+    private func generateChartData(completedTasksCount: Int, overdueTasksCount: Int, pastTasksCount: Int, ongoingTasksCount: Int) -> PieChartDataSet {
         let chartData = [
-            PieChartDataEntry(value: Double(taskStatistics.completedTasks), label: "Completed"),
-            PieChartDataEntry(value: Double(taskStatistics.ongoingTasks), label: "Ongoing"),
-            PieChartDataEntry(value: Double(taskStatistics.overdueTasks), label: "Overdue"),
-            PieChartDataEntry(value: Double(taskStatistics.deletedTasks), label: "Deleted")
+            PieChartDataEntry(value: Double(completedTasksCount), label: "Completed"),
+            PieChartDataEntry(value: Double(ongoingTasksCount), label: "Ongoing"),
+            PieChartDataEntry(value: Double(overdueTasksCount), label: "Overdue"),
+            PieChartDataEntry(value: Double(pastTasksCount), label: "Past")
         ]
-        
+
         let dataSet = PieChartDataSet(entries: chartData, label: "")
         dataSet.colors = ChartColorTemplates.joyful()
         dataSet.valueColors = [UIColor.black]
         dataSet.valueFont = .systemFont(ofSize: 12, weight: .semibold)
         dataSet.entryLabelColor = .black
         dataSet.entryLabelFont = .systemFont(ofSize: 12, weight: .bold)
-        
         return dataSet
     }
 }

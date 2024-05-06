@@ -73,18 +73,15 @@ extension TaskViewController {
         self.fetchTasks()
         self.taskTableView.reloadData()
     }
-    @objc private func handleBackButton(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
-    }
 }
 //MARK: - Helpers
 extension TaskViewController {
     private func style() {
-        title = "Current Tasks"
+        title = "Tasks"
         backgroundGradientColor()
-        self.navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isHidden = false
         navigationController?.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = .black
         addNewTaskButton.translatesAutoresizingMaskIntoConstraints = false
         
         taskTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -113,7 +110,6 @@ extension TaskViewController {
         view.bringSubviewToFront(addNewTaskButton)
     }
     private func configure() {
-     //   guard let user = self.user else { return }
         fetchTasks()
     }
 }
@@ -168,7 +164,6 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .normal, title: "Move to Overdue") { (action, view, completionHandler) in
             let taskToMove = self.tasks[indexPath.section]
-            
             TaskService.moveTaskToOverdue(task: taskToMove) { error in
                 if let error = error {
                     print("Error moving task to Overdue: \(error.localizedDescription)")
@@ -184,7 +179,6 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
         configuration.performsFirstActionWithFullSwipe = false
         return configuration
     }
-
 }
 //MARK: - TaskDetailViewControllerDelegate
 extension TaskViewController: TaskDetailViewControllerDelegate {

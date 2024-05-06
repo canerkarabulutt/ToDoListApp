@@ -47,7 +47,6 @@ extension PastTaskViewController {
         guard let indexPath = collectionView.indexPathForItem(at: touchPoint) else {
             return
         }
-    //    let taskToDelete = pastTasks[indexPath.row]
         let actionSheet = UIAlertController(title: "Remove", message: "Would you like to remove this task permanently?", preferredStyle: .actionSheet)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
             DispatchQueue.main.async {

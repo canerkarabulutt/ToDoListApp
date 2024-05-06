@@ -57,11 +57,11 @@ extension StatusView {
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
         
-            successRateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            successRateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             successRateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             successRateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
-            pieChartView.topAnchor.constraint(equalTo: successRateLabel.bottomAnchor, constant: 20),
+            pieChartView.topAnchor.constraint(equalTo: successRateLabel.bottomAnchor, constant: 24),
             pieChartView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             pieChartView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             pieChartView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 2/5)

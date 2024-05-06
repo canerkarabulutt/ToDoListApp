@@ -15,6 +15,13 @@
 		2B1058B32BE3B6EB008595FB /* OverdueTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058B22BE3B6EB008595FB /* OverdueTaskViewController.swift */; };
 		2B1058B52BE3B771008595FB /* OverdueTaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058B42BE3B771008595FB /* OverdueTaskCollectionViewCell.swift */; };
 		2B1058B72BE42FCA008595FB /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058B62BE42FCA008595FB /* TaskCellViewModel.swift */; };
+		2B1058BF2BE7C8D5008595FB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058BE2BE7C8D5008595FB /* SettingsViewController.swift */; };
+		2B1058C12BE7CA02008595FB /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058C02BE7CA02008595FB /* SettingsViewModel.swift */; };
+		2B1058C32BE7CA1E008595FB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058C22BE7CA1E008595FB /* SettingsView.swift */; };
+		2B1058C52BE7CA5D008595FB /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058C42BE7CA5D008595FB /* SettingsModel.swift */; };
+		2B1058C72BE8F627008595FB /* CurrentTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058C62BE8F627008595FB /* CurrentTaskViewController.swift */; };
+		2B1058C92BE8F774008595FB /* CurrentTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058C82BE8F774008595FB /* CurrentTaskTableViewCell.swift */; };
+		2B1058CB2BE8F7D6008595FB /* CurrentTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058CA2BE8F7D6008595FB /* CurrentTaskViewModel.swift */; };
 		2B850EE02BCFD5DE0064B3C0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2B850EDF2BCFD5DE0064B3C0 /* FirebaseAuth */; };
 		2B850EE22BCFD5E40064B3C0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2B850EE12BCFD5E40064B3C0 /* FirebaseFirestore */; };
 		2B850EE42BCFD5EA0064B3C0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2B850EE32BCFD5EA0064B3C0 /* FirebaseStorage */; };
@@ -51,7 +58,7 @@
 		2B850F312BCFD8100064B3C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B850F302BCFD8100064B3C0 /* GoogleService-Info.plist */; };
 		2B850F332BCFDA600064B3C0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B850F322BCFDA600064B3C0 /* Extensions.swift */; };
 		2BD038A12BE11E6A0085937C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD038A02BE11E6A0085937C /* LoginViewModel.swift */; };
-		2BD038A32BE16C560085937C /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD038A22BE16C560085937C /* SettingsModel.swift */; };
+		2BD038A32BE16C560085937C /* TaskListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD038A22BE16C560085937C /* TaskListModel.swift */; };
 		2BD038A72BE2BCEF0085937C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD038A62BE2BCEF0085937C /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +70,13 @@
 		2B1058B22BE3B6EB008595FB /* OverdueTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueTaskViewController.swift; sourceTree = "<group>"; };
 		2B1058B42BE3B771008595FB /* OverdueTaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverdueTaskCollectionViewCell.swift; sourceTree = "<group>"; };
 		2B1058B62BE42FCA008595FB /* TaskCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellViewModel.swift; sourceTree = "<group>"; };
+		2B1058BE2BE7C8D5008595FB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		2B1058C02BE7CA02008595FB /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		2B1058C22BE7CA1E008595FB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2B1058C42BE7CA5D008595FB /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		2B1058C62BE8F627008595FB /* CurrentTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTaskViewController.swift; sourceTree = "<group>"; };
+		2B1058C82BE8F774008595FB /* CurrentTaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTaskTableViewCell.swift; sourceTree = "<group>"; };
+		2B1058CA2BE8F7D6008595FB /* CurrentTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTaskViewModel.swift; sourceTree = "<group>"; };
 		2B1DB4C42BAD865B0040DF54 /* ToDoListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B850EE62BCFD6C60064B3C0 /* TimerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
 		2B850EE82BCFD6C60064B3C0 /* TaskModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
@@ -98,7 +112,7 @@
 		2B850F302BCFD8100064B3C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2B850F322BCFDA600064B3C0 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = ../../../../../Downloads/ToDoListApp/ToDoListApp/Extensions/Extensions.swift; sourceTree = "<group>"; };
 		2BD038A02BE11E6A0085937C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		2BD038A22BE16C560085937C /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		2BD038A22BE16C560085937C /* TaskListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListModel.swift; sourceTree = "<group>"; };
 		2BD038A62BE2BCEF0085937C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +131,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B1058CC2BE8F9F5008595FB /* TaskListControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2B1058C62BE8F627008595FB /* CurrentTaskViewController.swift */,
+				2B850EEE2BCFD6C60064B3C0 /* CompletedTaskViewController.swift */,
+				2B1058B22BE3B6EB008595FB /* OverdueTaskViewController.swift */,
+				2B850EF22BCFD6C60064B3C0 /* PastTaskViewController.swift */,
+			);
+			path = TaskListControllers;
+			sourceTree = "<group>";
+		};
+		2B1058CD2BE8FA34008595FB /* OtherControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2B850EF02BCFD6C60064B3C0 /* MainTabBarViewController.swift */,
+				2B1058BE2BE7C8D5008595FB /* SettingsViewController.swift */,
+				2B1058A32BE3A482008595FB /* StatusViewController.swift */,
+			);
+			path = OtherControllers;
+			sourceTree = "<group>";
+		};
+		2B1058CE2BE8FAC2008595FB /* TaskViews */ = {
+			isa = PBXGroup;
+			children = (
+				2B850F042BCFD6C60064B3C0 /* TaskTableViewCell.swift */,
+				2B850F032BCFD6C60064B3C0 /* TaskDetailCollectionViewCell.swift */,
+				2B1058C82BE8F774008595FB /* CurrentTaskTableViewCell.swift */,
+				2B850F002BCFD6C60064B3C0 /* CompletedTaskCollectionViewCell.swift */,
+				2B1058B42BE3B771008595FB /* OverdueTaskCollectionViewCell.swift */,
+				2B850F012BCFD6C60064B3C0 /* PastTaskCollectionViewCell.swift */,
+			);
+			path = TaskViews;
+			sourceTree = "<group>";
+		};
+		2B1058CF2BE8FB42008595FB /* OtherViews */ = {
+			isa = PBXGroup;
+			children = (
+				2B850EFF2BCFD6C60064B3C0 /* AuthInputView.swift */,
+				2B850F052BCFD6C60064B3C0 /* TextFieldView.swift */,
+				2B850F022BCFD6C60064B3C0 /* ProfileView.swift */,
+				2B1058AE2BE3B26D008595FB /* StatusView.swift */,
+				2B1058C22BE7CA1E008595FB /* SettingsView.swift */,
+			);
+			path = OtherViews;
+			sourceTree = "<group>";
+		};
 		2B1DB4BB2BAD865B0040DF54 = {
 			isa = PBXGroup;
 			children = (
@@ -162,8 +222,9 @@
 			children = (
 				2B850EE82BCFD6C60064B3C0 /* TaskModel.swift */,
 				2B850EE92BCFD6C60064B3C0 /* UserModel.swift */,
-				2BD038A22BE16C560085937C /* SettingsModel.swift */,
+				2BD038A22BE16C560085937C /* TaskListModel.swift */,
 				2B1058AC2BE3ACDE008595FB /* StatusModel.swift */,
+				2B1058C42BE7CA5D008595FB /* SettingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -180,9 +241,10 @@
 		2B850EF72BCFD6C60064B3C0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2B1058CC2BE8F9F5008595FB /* TaskListControllers */,
 				2B850F352BCFE3490064B3C0 /* TaskControllers */,
 				2B850F342BCFE3160064B3C0 /* AuthControllers */,
-				2B850EF02BCFD6C60064B3C0 /* MainTabBarViewController.swift */,
+				2B1058CD2BE8FA34008595FB /* OtherControllers */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -193,12 +255,14 @@
 				2B850EF82BCFD6C60064B3C0 /* RegisterViewModel.swift */,
 				2BD038A02BE11E6A0085937C /* LoginViewModel.swift */,
 				2B1058B62BE42FCA008595FB /* TaskCellViewModel.swift */,
+				2B1058CA2BE8F7D6008595FB /* CurrentTaskViewModel.swift */,
 				2B1058B02BE3B330008595FB /* StatusViewModel.swift */,
+				2B1058C02BE7CA02008595FB /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		2B850EFE2BCFD6C60064B3C0 /* NewTask */ = {
+		2B850EFE2BCFD6C60064B3C0 /* NewTaskViews */ = {
 			isa = PBXGroup;
 			children = (
 				2B850EFC2BCFD6C60064B3C0 /* InputTextView.swift */,
@@ -206,22 +270,15 @@
 				2B850EFA2BCFD6C60064B3C0 /* CalendarView.swift */,
 				2B850EFD2BCFD6C60064B3C0 /* TaskCompletedCalendarView.swift */,
 			);
-			path = NewTask;
+			path = NewTaskViews;
 			sourceTree = "<group>";
 		};
 		2B850F062BCFD6C60064B3C0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2B850EFE2BCFD6C60064B3C0 /* NewTask */,
-				2B850EFF2BCFD6C60064B3C0 /* AuthInputView.swift */,
-				2B850F052BCFD6C60064B3C0 /* TextFieldView.swift */,
-				2B850F042BCFD6C60064B3C0 /* TaskTableViewCell.swift */,
-				2B850F032BCFD6C60064B3C0 /* TaskDetailCollectionViewCell.swift */,
-				2B850F002BCFD6C60064B3C0 /* CompletedTaskCollectionViewCell.swift */,
-				2B850F012BCFD6C60064B3C0 /* PastTaskCollectionViewCell.swift */,
-				2B1058B42BE3B771008595FB /* OverdueTaskCollectionViewCell.swift */,
-				2B850F022BCFD6C60064B3C0 /* ProfileView.swift */,
-				2B1058AE2BE3B26D008595FB /* StatusView.swift */,
+				2B1058CF2BE8FB42008595FB /* OtherViews */,
+				2B1058CE2BE8FAC2008595FB /* TaskViews */,
+				2B850EFE2BCFD6C60064B3C0 /* NewTaskViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -263,10 +320,6 @@
 				2B850EF62BCFD6C60064B3C0 /* TaskViewController.swift */,
 				2B850EF52BCFD6C60064B3C0 /* TaskDetailViewController.swift */,
 				2B850EF12BCFD6C60064B3C0 /* NewTaskViewController.swift */,
-				2B850EEE2BCFD6C60064B3C0 /* CompletedTaskViewController.swift */,
-				2B850EF22BCFD6C60064B3C0 /* PastTaskViewController.swift */,
-				2B1058B22BE3B6EB008595FB /* OverdueTaskViewController.swift */,
-				2B1058A32BE3A482008595FB /* StatusViewController.swift */,
 			);
 			path = TaskControllers;
 			sourceTree = "<group>";
@@ -364,24 +417,31 @@
 				2B850F332BCFDA600064B3C0 /* Extensions.swift in Sources */,
 				2BD038A12BE11E6A0085937C /* LoginViewModel.swift in Sources */,
 				2B850F1B2BCFD6C60064B3C0 /* TaskDetailViewController.swift in Sources */,
+				2B1058C12BE7CA02008595FB /* SettingsViewModel.swift in Sources */,
 				2B850F132BCFD6C60064B3C0 /* TaskService.swift in Sources */,
 				2B850F102BCFD6C60064B3C0 /* TaskModel.swift in Sources */,
 				2B850F1D2BCFD6C60064B3C0 /* RegisterViewModel.swift in Sources */,
 				2B850F142BCFD6C60064B3C0 /* CompletedTaskViewController.swift in Sources */,
 				2B1058B12BE3B330008595FB /* StatusViewModel.swift in Sources */,
-				2BD038A32BE16C560085937C /* SettingsModel.swift in Sources */,
+				2B1058C32BE7CA1E008595FB /* SettingsView.swift in Sources */,
+				2BD038A32BE16C560085937C /* TaskListModel.swift in Sources */,
 				2B850F0F2BCFD6C60064B3C0 /* TimerManager.swift in Sources */,
 				2B1058B72BE42FCA008595FB /* TaskCellViewModel.swift in Sources */,
 				2B850F122BCFD6C60064B3C0 /* AuthService.swift in Sources */,
 				2B850F202BCFD6C60064B3C0 /* InputTextView.swift in Sources */,
 				2B850F1A2BCFD6C60064B3C0 /* ListViewController.swift in Sources */,
+				2B1058CB2BE8F7D6008595FB /* CurrentTaskViewModel.swift in Sources */,
+				2B1058BF2BE7C8D5008595FB /* SettingsViewController.swift in Sources */,
 				2B850F162BCFD6C60064B3C0 /* MainTabBarViewController.swift in Sources */,
 				2B1058B32BE3B6EB008595FB /* OverdueTaskViewController.swift in Sources */,
 				2B850F212BCFD6C60064B3C0 /* TaskCompletedCalendarView.swift in Sources */,
 				2B850F292BCFD6C60064B3C0 /* AppDelegate.swift in Sources */,
 				2B850F112BCFD6C60064B3C0 /* UserModel.swift in Sources */,
+				2B1058C72BE8F627008595FB /* CurrentTaskViewController.swift in Sources */,
+				2B1058C92BE8F774008595FB /* CurrentTaskTableViewCell.swift in Sources */,
 				2B850F272BCFD6C60064B3C0 /* TaskTableViewCell.swift in Sources */,
 				2B850F1C2BCFD6C60064B3C0 /* TaskViewController.swift in Sources */,
+				2B1058C52BE7CA5D008595FB /* SettingsModel.swift in Sources */,
 				2B850F232BCFD6C60064B3C0 /* CompletedTaskCollectionViewCell.swift in Sources */,
 				2B850F152BCFD6C60064B3C0 /* LoginViewController.swift in Sources */,
 				2BD038A72BE2BCEF0085937C /* HomeViewController.swift in Sources */,

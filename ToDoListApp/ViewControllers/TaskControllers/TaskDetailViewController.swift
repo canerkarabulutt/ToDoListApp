@@ -29,6 +29,8 @@ class TaskDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
+        navigationController?.navigationBar.tintColor = .black
+
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

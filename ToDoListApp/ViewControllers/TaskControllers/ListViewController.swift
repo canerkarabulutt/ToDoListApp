@@ -21,7 +21,7 @@ class ListViewController: UIViewController {
         style()
         configureModels()
         navigationController?.navigationBar.isHidden = false
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationItem.largeTitleDisplayMode = .never
     }
     override func viewDidLayoutSubviews() {
@@ -62,7 +62,7 @@ extension ListViewController {
         })]))
     }
     private func viewCurrentTasks() {
-        let vc = TaskViewController()
+        let vc = CurrentTaskViewController()
         vc.title = "Current Tasks"
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)

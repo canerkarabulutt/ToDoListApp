@@ -173,7 +173,7 @@ extension RegisterViewController {
         ])
     }
 }
-//MARK: -
+//MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
 extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as! UIImage
