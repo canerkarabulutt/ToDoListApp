@@ -15,7 +15,7 @@ class CurrentTaskViewController: UIViewController {
             configure()
         }
     }
-    private var tasks: [TaskModel] = []
+    private var cuurentTasks: [TaskModel] = []
     
     private let taskTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -27,15 +27,41 @@ class CurrentTaskViewController: UIViewController {
         style()
         layout()
         fetchUser()
+        addSortButton()
+    }
+}
+//MARK: - Selector
+extension CurrentTaskViewController {
+    @objc private func sortOptionsTapped() {
+        let alertController = UIAlertController(title: "Sort Options", message: nil, preferredStyle: .actionSheet)
+        
+        let sortByStartDateAction = UIAlertAction(title: "Sort by Start Date", style: .default) { _ in
+            self.sortTasksByStartDate()
+        }
+        alertController.addAction(sortByStartDateAction)
+
+        let sortByHeaderAction = UIAlertAction(title: "Sort by A-Z", style: .default) { _ in
+            self.sortTasksByHeader()
+        }
+        alertController.addAction(sortByHeaderAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        sortByStartDateAction.setValue(UIColor.purple, forKey: "titleTextColor")
+        sortByHeaderAction.setValue(UIColor.purple, forKey: "titleTextColor")
+        cancelAction.setValue(UIColor.black, forKey: "titleTextColor")
+
+        present(alertController, animated: true, completion: nil)
     }
 }
 //MARK: - Service
 extension CurrentTaskViewController {
     private func fetchTasks() {
         guard let uid = self.user?.uid else { return }
-        TaskService.fetchTask(uid: uid) { tasks in
+        TaskService.fetchCurrentTask(uid: uid) { tasks in
             DispatchQueue.main.async {
-                self.tasks = tasks
+                self.cuurentTasks = tasks
                 self.taskTableView.reloadData()
             }
         }
@@ -55,7 +81,7 @@ extension CurrentTaskViewController {
         backgroundGradientColor()
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = .white
         
         taskTableView.translatesAutoresizingMaskIntoConstraints = false
         taskTableView.delegate = self
@@ -77,18 +103,22 @@ extension CurrentTaskViewController {
     private func configure() {
         fetchTasks()
     }
+    private func addSortButton() {
+        let sortButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .plain, target: self, action: #selector(sortOptionsTapped))
+        navigationItem.rightBarButtonItem = sortButton
+    }
 }
 //MARK: - UITableViewDelegate & UITableViewDataSource
 extension CurrentTaskViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tasks.count
+        return cuurentTasks.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = taskTableView.dequeueReusableCell(withIdentifier: CurrentTaskTableViewCell.cellIdentifier, for: indexPath) as? CurrentTaskTableViewCell else { return UITableViewCell() }
-        let viewModel = CurrentTaskViewModel(task: tasks[indexPath.section])
+        let viewModel = CurrentTaskViewModel(task: cuurentTasks[indexPath.section])
         cell.configure(with: viewModel)
         return cell
     }
@@ -105,9 +135,20 @@ extension CurrentTaskViewController: UITableViewDelegate, UITableViewDataSource 
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let selectedTask = tasks[indexPath.section]
-        let detailVC = TaskDetailViewController()
+        let selectedTask = cuurentTasks[indexPath.section]
+        let detailVC = ListDetailViewController()
         detailVC.task = selectedTask
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+//MARK: - Sort Optionws
+extension CurrentTaskViewController {
+    private func sortTasksByStartDate() {
+        cuurentTasks.sort { $0.startDate < $1.startDate }
+        taskTableView.reloadData()
+    }
+    private func sortTasksByHeader() {
+        cuurentTasks.sort { $0.header.lowercased() < $1.header.lowercased() }
+        taskTableView.reloadData()
     }
 }

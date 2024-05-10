@@ -1,14 +1,14 @@
 //
-//  RegisterCollectionViewCell.swift
+//  ListDetailCollectionViewCell.swift
 //  ToDoListApp
 //
-//  Created by Caner Karabulut on 22.03.2024.
+//  Created by Caner Karabulut on 8.05.2024.
 //
 
 import UIKit
 import FirebaseFirestore
 
-class TaskDetailCollectionViewCell: UICollectionViewCell {
+class ListDetailCollectionViewCell: UICollectionViewCell {
     static let cellIdentifier = "TaksDetailCollectionViewCell"
     //MARK: - Properties
     var task: TaskModel?
@@ -76,7 +76,7 @@ class TaskDetailCollectionViewCell: UICollectionViewCell {
     }
 }
 //MARK: - Helpers
-extension TaskDetailCollectionViewCell {
+extension ListDetailCollectionViewCell {
     private func style() {
         contentView.addSubview(taskHeaderLabel)
         contentView.addSubview(taskLabel)

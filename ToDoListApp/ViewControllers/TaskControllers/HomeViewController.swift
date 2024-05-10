@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
         }
     }
     private let profileView = ProfileView()
+    private let homeView = HomeView()
     private var isProfileViewActive: Bool = false
     
     private lazy var profileButton: UIButton = {
@@ -32,56 +33,18 @@ class HomeViewController: UIViewController {
         label.textColor = .white
         return label
     }()
-    private lazy var goToCurrentTaskPage: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "checklist"), for: .normal)
-        button.setTitle("Browse", for: .normal)
-        button.homeButtonConfiguration()
-        button.addTarget(self, action: #selector(handleGoButton), for: .touchUpInside)
-        return button
-    }()
-    private lazy var listButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "text.badge.checkmark"), for: .normal)
-        button.setTitle("Lists", for: .normal)
-        button.homeButtonConfiguration()
-        button.addTarget(self, action: #selector(handleOtherTasksButton), for: .touchUpInside)
-        return button
-    }()
-    private lazy var statusButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "chart.bar.xaxis"), for: .normal)
-        button.setTitle("Status", for: .normal)
-        button.homeButtonConfiguration()
-        button.addTarget(self, action: #selector(handleStatusButton), for: .touchUpInside)
-        return button
-    }()
-    private var stackView = UIStackView()
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         style()
         layout()
         fetchUser()
+        homeView.navigationController = navigationController
+        homeView.fetchLatestTask()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-    }
-}
-//MARK: - Selector
-extension HomeViewController {
-    @objc private func handleGoButton(_ sender: UIButton) {
-        let vc = TaskViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    @objc private func handleOtherTasksButton(_ sender: UIButton) {
-        let vc = ListViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    @objc private func handleStatusButton(_ sender: UIButton) {
-        let vc = StatusViewController()
-        navigationController?.pushViewController(vc, animated: true)
     }
 }
 //MARK: - Service
@@ -114,14 +77,9 @@ extension HomeViewController {
         self.navigationController?.navigationBar.isHidden = true
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         profileButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        stackView = UIStackView(arrangedSubviews: [goToCurrentTaskPage, listButton, statusButton])
-        stackView.axis = .vertical
-        stackView.spacing = 32
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
+        homeView.translatesAutoresizingMaskIntoConstraints = false
         profileView.translatesAutoresizingMaskIntoConstraints = false
+        
         profileView.layer.cornerRadius = 20
         profileView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         profileView.delegate = self
@@ -129,8 +87,8 @@ extension HomeViewController {
     private func layout() {
         view.addSubview(nameLabel)
         view.addSubview(profileButton)
-        view.addSubview(stackView)
         view.addSubview(profileView)
+        view.addSubview(homeView)
         
         NSLayoutConstraint.activate([
             profileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
@@ -139,10 +97,10 @@ extension HomeViewController {
             nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             
-            stackView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 40),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 2/5),
-            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1/3),
+            homeView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 48),
+            homeView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            homeView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/1.8),
+            homeView.widthAnchor.constraint(equalTo: view.widthAnchor),
             
             profileView.topAnchor.constraint(equalTo: profileButton.topAnchor, constant: 48),
             profileView.leadingAnchor.constraint(equalTo: view.trailingAnchor),

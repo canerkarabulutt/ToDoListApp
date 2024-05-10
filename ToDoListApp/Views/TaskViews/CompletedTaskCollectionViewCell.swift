@@ -15,15 +15,13 @@ class CompletedTaskCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textColor = .black
-        label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
     private let taskLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.textColor = .black
-        label.textAlignment = .center
         label.numberOfLines = 1
         return label
     }()
@@ -35,13 +33,12 @@ class CompletedTaskCollectionViewCell: UICollectionViewCell {
         label.numberOfLines = 0
         return label
     }()
-    private lazy var checkMarkButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-        button.backgroundColor = .systemGreen
-        button.layer.borderColor = UIColor.black.cgColor
-        button.tintColor = .white
-        return button
+    private let checkMarkImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "checkmark.circle.fill")
+        imageView.tintColor = .systemGreen
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     private let separatorView: UIView = {
         let view = UIView()
@@ -58,10 +55,10 @@ class CompletedTaskCollectionViewCell: UICollectionViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        checkMarkButton.frame = CGRect(x: contentView.height/2-5, y: 5, width: contentView.height/4, height: contentView.height/4)
-        calendarLabel.frame = CGRect(x: 4, y: checkMarkButton.bottom, width: contentView.height+10, height: (contentView.height*3)/4)
-        taskHeaderLabel.frame = CGRect(x: calendarLabel.right+10, y: 2, width: contentView.width-calendarLabel.right-15, height: contentView.height/2)
-        taskLabel.frame = CGRect(x: calendarLabel.right+10, y: taskHeaderLabel.bottom, width: contentView.width-calendarLabel.right-15, height: contentView.height/2)
+        checkMarkImageView.frame = CGRect(x: contentView.height/2-5, y: 5, width: contentView.height/4, height: contentView.height/4)
+        calendarLabel.frame = CGRect(x: 4, y: checkMarkImageView.bottom, width: contentView.height+10, height: (contentView.height*3)/4)
+        taskHeaderLabel.frame = CGRect(x: calendarLabel.right+10, y: 2, width: contentView.width-calendarLabel.right-15, height: contentView.height/1.5)
+        taskLabel.frame = CGRect(x: calendarLabel.right+10, y: taskHeaderLabel.bottom, width: contentView.width-calendarLabel.right-15, height: contentView.height/3)
         separatorView.frame = CGRect(x: calendarLabel.right+2, y: 0, width: 2, height: contentView.height)
     }
 }
@@ -72,16 +69,22 @@ extension CompletedTaskCollectionViewCell {
         contentView.addSubview(taskLabel)
         contentView.addSubview(calendarLabel)
         contentView.addSubview(separatorView)
-        contentView.addSubview(checkMarkButton)
+        contentView.addSubview(checkMarkImageView)
+        contentView.layer.cornerRadius = 24
         contentView.backgroundColor = .white
         contentView.layer.borderWidth = 2
         contentView.layer.borderColor = UIColor.mainColor.cgColor
-        checkMarkButton.layer.cornerRadius = contentView.height/8
-        checkMarkButton.layer.masksToBounds = true
+        checkMarkImageView.layer.cornerRadius = contentView.height/8
+        checkMarkImageView.layer.masksToBounds = true
     }
     func configure(with task: TaskModel) {
-        taskHeaderLabel.text = task.header.uppercased()
-        taskLabel.text = task.text
+        let headerColor = UIColor.purple
+        let attributedHeader = NSMutableAttributedString(string: "Subject;\n\n 📝", attributes: [NSAttributedString.Key.foregroundColor: headerColor])
+        let attributedText = NSAttributedString(string: task.header.uppercased())
+        attributedHeader.append(attributedText)
+        taskHeaderLabel.attributedText = attributedHeader
+
+        taskLabel.text = "Click to see the content...🔍"
         if let selectedDate = task.calendar["selectedDate"] as? Timestamp {
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale(identifier: "en_US")

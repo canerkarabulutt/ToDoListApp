@@ -88,8 +88,10 @@ class CurrentTaskTableViewCell: UITableViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        layer.borderWidth = 3
-        layer.borderColor = UIColor.black.cgColor
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.mainColor.cgColor
+        layer.cornerRadius = 16
+        layer.masksToBounds = true
     }
 }
 //MARK: - Helpers
@@ -139,6 +141,7 @@ extension CurrentTaskTableViewCell {
             removeExclamationMark()
         }
     }
+
     private func addExclamationMark() {
         let exclamationImageView = UIImageView(image: UIImage(systemName: "exclamationmark.circle.fill"))
         exclamationImageView.tintColor = .red
@@ -161,4 +164,3 @@ extension CurrentTaskTableViewCell {
         return endDate < Date()
     }
 }
-

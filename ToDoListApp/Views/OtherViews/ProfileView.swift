@@ -25,8 +25,6 @@ class ProfileView: UIView {
     
     private let profileImageView: UIImageView = {
         let image = UIImageView()
-        image.clipsToBounds = true
-        image.layer.masksToBounds = true
         image.backgroundColor = .white
         return image
     }()
@@ -35,9 +33,15 @@ class ProfileView: UIView {
         label.textAlignment = .center
         return label
     }()
-    private lazy var usernameLabel: UILabel = {
+    private let usernameLabel: UILabel = {
        let label = UILabel()
         label.textAlignment = .center
+        return label
+    }()
+    private let emailLabel: UILabel = {
+       let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 0
         return label
     }()
     private lazy var signOutButton: UIButton = {
@@ -65,6 +69,8 @@ class ProfileView: UIView {
 
         let profileImageSize: CGFloat = bounds.height / 8
         profileImageView.frame = CGRect(x: (bounds.width - profileImageSize) / 2, y: 16, width: profileImageSize, height: profileImageSize)
+        profileImageView.layer.cornerRadius = profileImageSize / 2
+        profileImageView.clipsToBounds = true
 
         nameLabel.sizeToFit()
         nameLabel.frame = CGRect(x: 8, y: profileImageView.frame.maxY + 12, width: bounds.width - 16, height: profileImageSize / 2)
@@ -72,8 +78,11 @@ class ProfileView: UIView {
         usernameLabel.sizeToFit()
         usernameLabel.frame = CGRect(x: 8, y: nameLabel.frame.maxY + 4, width: bounds.width - 16, height: profileImageSize / 2)
         
+        emailLabel.sizeToFit()
+        emailLabel.frame = CGRect(x: width/12, y: usernameLabel.frame.maxY + 4, width: bounds.width - 16, height: profileImageSize / 2)
+        
         let buttonWidth = bounds.width/2
-        signOutButton.frame = CGRect(x: (bounds.width - buttonWidth) / 2, y: usernameLabel.bottom + 16, width: bounds.width/2, height: profileImageSize / 3)
+        signOutButton.frame = CGRect(x: (bounds.width - buttonWidth) / 2, y: emailLabel.bottom + 50, width: bounds.width/2, height: profileImageSize / 3)
     }
 }
 //MARK: - Selector
@@ -96,6 +105,7 @@ extension ProfileView {
         addSubview(profileImageView)
         addSubview(nameLabel)
         addSubview(usernameLabel)
+        addSubview(emailLabel)
         addSubview(signOutButton)
     }
     private func attributedTitle(headerTitle: String, title: String) -> NSMutableAttributedString {
@@ -107,5 +117,6 @@ extension ProfileView {
         guard let user = self.user else { return }
         self.usernameLabel.attributedText = attributedTitle(headerTitle: "Username", title: "\(user.username)")
         self.nameLabel.attributedText = attributedTitle(headerTitle: "Name", title: "\(user.name)")
+        self.emailLabel.attributedText = attributedTitle(headerTitle: "Email", title: "\(user.email)")
     }
 }

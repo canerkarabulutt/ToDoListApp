@@ -48,7 +48,7 @@ class NewTaskViewController: UIViewController {
         button.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor = .black
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.layerStyle()
+        button.layerStyle2()
         button.addTarget(self, action: #selector(handleCancelButton), for: .touchUpInside)
         return button
     }()
@@ -56,7 +56,7 @@ class NewTaskViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Add Item", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.backgroundColor = .mainColor
+        button.backgroundColor = .purple
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.layerStyle()
         button.addTarget(self, action: #selector(handleAddButton), for: .touchUpInside)
@@ -95,9 +95,9 @@ extension NewTaskViewController {
 extension NewTaskViewController {
     private func style() {
         secondBackgroundGradientColor()
-        view.layer.borderWidth = 6
-        view.layer.cornerRadius = 12
-        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = 2
+        view.layer.cornerRadius = 16
+        view.layer.borderColor = UIColor.mainColor.cgColor
         view.layer.masksToBounds = true
         
         newTaskLabel.translatesAutoresizingMaskIntoConstraints = false

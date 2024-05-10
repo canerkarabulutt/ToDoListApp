@@ -23,10 +23,9 @@ class TaskViewController: UIViewController {
     }()
     private lazy var addNewTaskButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
+        button.setImage(UIImage(systemName: "plus.circle.fill")?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.contentHorizontalAlignment = .fill
         button.contentVerticalAlignment = .fill
-        button.tintColor = .black
         button.addTarget(self, action: #selector(handleAddNewTaskButton), for: .touchUpInside)
         return button
     }()
@@ -81,7 +80,7 @@ extension TaskViewController {
         backgroundGradientColor()
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = .white
         addNewTaskButton.translatesAutoresizingMaskIntoConstraints = false
         
         taskTableView.translatesAutoresizingMaskIntoConstraints = false

@@ -119,7 +119,7 @@ struct TaskService {
     }
     static func fetchOverdueTasks(uid: String, completion: @escaping ([TaskModel]) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("tasks").document(uid).collection("overdue_tasks").order(by: "timestamp", descending: false).addSnapshotListener { snapshot, error in
+        Firestore.firestore().collection("tasks").document(uid).collection("overdue_tasks").order(by: "timestamp", descending: true).addSnapshotListener { snapshot, error in
             var overdueTasks = [TaskModel]()
             if let documents = snapshot?.documents {
                 documents.forEach { document in
@@ -130,4 +130,18 @@ struct TaskService {
             completion(overdueTasks)
         }
     }
+    static func fetchCurrentTask(uid: String, completion: @escaping ([TaskModel]) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("tasks").document(uid).collection("ongoing_tasks").order(by: "timestamp", descending: true).addSnapshotListener { snapshot, error in
+            var currentTasks = [TaskModel]()
+            if let documents = snapshot?.documents {
+                documents.forEach { document in
+                    let data = document.data()
+                    currentTasks.append(TaskModel(data: data))
+                }
+            }
+            completion(currentTasks)
+        }
+    }
 }
+

@@ -12,12 +12,10 @@ import FirebaseFirestore
 class PastTaskViewController: UIViewController {
     //MARK: - Properties
     private var pastTasks: [TaskModel] = []
-    private var isSelectModeEnabled = false
-    private var selectedIndices: [IndexPath] = []
     
     private let collectionView : UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { _, _ in
         let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
-        item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0)
         let group = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.15)), subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .none
@@ -29,7 +27,7 @@ class PastTaskViewController: UIViewController {
         style()
         fetchPastTasks()
         setupLongPressGesture()
-        selectButtonTapped()
+        addSortButton()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -38,9 +36,6 @@ class PastTaskViewController: UIViewController {
 }
 //MARK: - Selector
 extension PastTaskViewController {
-    @objc private func selectButtonTapped() {
-        
-    }
     @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
         guard gesture.state == .began else { return }
         let touchPoint = gesture.location(in: collectionView)
@@ -60,6 +55,28 @@ extension PastTaskViewController {
         deleteAction.setValue(UIColor.purple, forKey: "titleTextColor")
         cancelAction.setValue(UIColor.black, forKey: "titleTextColor")
         present(actionSheet, animated: true, completion: nil)
+    }
+    @objc private func sortOptionsTapped() {
+        let alertController = UIAlertController(title: "Sort Options", message: nil, preferredStyle: .actionSheet)
+        
+        let sortByStartDateAction = UIAlertAction(title: "Sort by Start Date", style: .default) { _ in
+            self.sortTasksByStartDate()
+        }
+        alertController.addAction(sortByStartDateAction)
+
+        let sortByHeaderAction = UIAlertAction(title: "Sort by A-Z", style: .default) { _ in
+            self.sortTasksByHeader()
+        }
+        alertController.addAction(sortByHeaderAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        sortByStartDateAction.setValue(UIColor.purple, forKey: "titleTextColor")
+        sortByHeaderAction.setValue(UIColor.purple, forKey: "titleTextColor")
+        cancelAction.setValue(UIColor.black, forKey: "titleTextColor")
+
+        present(alertController, animated: true, completion: nil)
     }
 }
 //MARK: - Service
@@ -102,10 +119,9 @@ extension PastTaskViewController {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         collectionView.addGestureRecognizer(longPressGesture)
     }
-    private func selectButton() {
-        let selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectButtonTapped))
-        selectButton.tintColor = .white
-        navigationItem.rightBarButtonItem = selectButton
+    private func addSortButton() {
+        let sortButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .plain, target: self, action: #selector(sortOptionsTapped))
+        navigationItem.rightBarButtonItem = sortButton
     }
 }
 //MARK: - UICollectionViewDelegate & UICollectionViewDataSource
@@ -117,16 +133,24 @@ extension PastTaskViewController: UICollectionViewDelegate, UICollectionViewData
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PastTaskCollectionViewCell.cellIdentifier, for: indexPath) as? PastTaskCollectionViewCell else { return UICollectionViewCell()}
         let task = pastTasks[indexPath.row]
         cell.configure(with: task)
-        cell.layer.cornerRadius = 16
-        cell.layer.masksToBounds = true
-        cell.backgroundColor = .white
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         let selectedTask = pastTasks[indexPath.row]
-        let detailVC = TaskDetailViewController()
+        let detailVC = ListDetailViewController()
         detailVC.task = selectedTask
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+//MARK: - Sort Optionws
+extension PastTaskViewController {
+    private func sortTasksByStartDate() {
+        pastTasks.sort { $0.startDate > $1.startDate }
+        collectionView.reloadData()
+    }
+    private func sortTasksByHeader() {
+        pastTasks.sort { $0.header.lowercased() < $1.header.lowercased() }
+        collectionView.reloadData()
     }
 }

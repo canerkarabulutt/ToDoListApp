@@ -1,35 +1,32 @@
 //
-//  SettingsView.swift
+//  SettingsTableViewCell.swift
 //  ToDoListApp
 //
 //  Created by Caner Karabulut on 5.05.2024.
 //
 
 import UIKit
+import FirebaseAuth
 
-class SettingsView: UIView {
+class SettingsTableViewCell: UITableViewCell {
     //MARK: - Properties
-    private let aboutLabel: UILabel = {
-        let label = UILabel()
-        label.text = "About"
-        return label
-    }()
+    static let cellIdentifier = "SettingsTableViewCell"
     //MARK: - Lifecycle
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        style()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setup()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
 }
 //MARK: - Helpers
-extension SettingsView {
-    private func style() {
-
+extension SettingsTableViewCell {
+    private func setup() {
+        backgroundColor = .clear
+    }
+    func configure(with option: SettingsOption) {
+        textLabel?.text = option.title
     }
 }

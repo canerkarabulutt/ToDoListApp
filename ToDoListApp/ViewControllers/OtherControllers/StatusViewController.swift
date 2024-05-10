@@ -20,7 +20,7 @@ class StatusViewController: UIViewController {
         setupView()
         fetchData()
         navigationController?.navigationBar.isHidden = false
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationItem.largeTitleDisplayMode = .never
     }
     override func viewDidLayoutSubviews() {

@@ -13,17 +13,15 @@ class PastTaskCollectionViewCell: UICollectionViewCell {
     //MARK: - Properties
     private let taskHeaderLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .darkGray.withAlphaComponent(0.7)
-        label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
     private let taskLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.textColor = .lightGray
-        label.textAlignment = .center
         label.numberOfLines = 1
         return label
     }()
@@ -50,23 +48,33 @@ class PastTaskCollectionViewCell: UICollectionViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        calendarLabel.frame = CGRect(x: 5, y: 2, width: contentView.height*1.25, height: contentView.height)
-        taskHeaderLabel.frame = CGRect(x: calendarLabel.right+10, y: 2, width: contentView.width-calendarLabel.right-15, height: contentView.height/2)
-        taskLabel.frame = CGRect(x: calendarLabel.right+10, y: taskHeaderLabel.bottom, width: contentView.width-calendarLabel.right-15, height: contentView.height/2)
+        calendarLabel.frame = CGRect(x: 4, y: 20, width: contentView.height+10, height: (contentView.height*3)/4)
+        taskHeaderLabel.frame = CGRect(x: calendarLabel.right+10, y: 2, width: contentView.width-calendarLabel.right-15, height: contentView.height/1.5)
+        taskLabel.frame = CGRect(x: calendarLabel.right+10, y: taskHeaderLabel.bottom, width: contentView.width-calendarLabel.right-15, height: contentView.height/3)
         separatorView.frame = CGRect(x: calendarLabel.right+1, y: 0, width: 2, height: contentView.height)
     }
 }
 //MARK: - Helpers
 extension PastTaskCollectionViewCell {
     private func style() {
+        contentView.layer.cornerRadius = 24
+        contentView.layer.masksToBounds = true
+        contentView.layer.borderWidth = 2
+        contentView.layer.borderColor = UIColor.mainColor.cgColor
+        contentView.backgroundColor = .white
         contentView.addSubview(taskHeaderLabel)
         contentView.addSubview(taskLabel)
         contentView.addSubview(calendarLabel)
         contentView.addSubview(separatorView)
     }
     func configure(with task: TaskModel) {
-        taskHeaderLabel.text = task.header.uppercased()
-        taskLabel.text = task.text
+        let headerColor = UIColor.darkGray
+        let attributedHeader = NSMutableAttributedString(string: "Subject;\n\n 📝", attributes: [NSAttributedString.Key.foregroundColor: headerColor])
+        let attributedText = NSAttributedString(string: task.header.uppercased())
+        attributedHeader.append(attributedText)
+        taskHeaderLabel.attributedText = attributedHeader
+        
+        taskLabel.text = "Click to see the content...🔍"
         if let selectedDate = task.calendar["selectedDate"] as? Timestamp {
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale(identifier: "en_US")

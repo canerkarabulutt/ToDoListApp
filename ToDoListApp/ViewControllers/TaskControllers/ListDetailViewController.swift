@@ -1,17 +1,13 @@
 //
-//  TaskDetailViewController.swift
+//  ListDetailViewController.swift
 //  ToDoListApp
 //
-//  Created by Caner Karabulut on 26.03.2024.
+//  Created by Caner Karabulut on 8.05.2024.
 //
 
 import UIKit
 
-protocol TaskDetailViewControllerDelegate: AnyObject {
-    func didDeleteTask()
-}
-
-class TaskDetailViewController: UIViewController {
+class ListDetailViewController: UIViewController {
     //MARK: - Properties
     var task: TaskModel?
     var viewModel: TaskDetailViewModel?
@@ -40,7 +36,7 @@ class TaskDetailViewController: UIViewController {
     }
 }
 //MARK: - Selector
-extension TaskDetailViewController {
+extension ListDetailViewController {
     @objc private func didTapCheck() {
         guard let task = task else { return }
         
@@ -91,14 +87,9 @@ extension TaskDetailViewController {
     }
 }
 //MARK: - Helpers
-extension TaskDetailViewController {
+extension ListDetailViewController {
     private func style() {
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(didTapTrash)),
-            UIBarButtonItem(image: UIImage(systemName: "checkmark.shield.fill"), style: .done, target: self, action: #selector(didTapCheck)),
-        ]
         navigationController?.navigationBar.isHidden = false
-        navigationController?.navigationBar.tintColor = .white
         backgroundGradientColor()
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -109,7 +100,7 @@ extension TaskDetailViewController {
     }
 }
 //MARK: - UICollectionViewDelegate & UICollectionViewDataSource
-extension TaskDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ListDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
