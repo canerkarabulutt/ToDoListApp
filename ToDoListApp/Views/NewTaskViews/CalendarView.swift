@@ -26,11 +26,10 @@ class CalendarView: UIDatePicker {
         let label = UILabel()
         label.text = "Start Date:"
         label.textColor = .black
-        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
     //MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,7 +54,7 @@ extension CalendarView {
 
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6)
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 3)
         ])
     }
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import SDWebImage
 
 protocol ProfileViewDelegate: AnyObject {
     func signOutUser()
@@ -44,6 +45,14 @@ class ProfileView: UIView {
         label.numberOfLines = 0
         return label
     }()
+    private let aboutLabel: UILabel = {
+        let label = UILabel()
+        label.text = "ToDoListApp v1.0.1"
+        label.textAlignment = .center
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 20, weight: .semibold)
+        return label
+    }()
     private lazy var signOutButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Out", for: .normal)
@@ -68,7 +77,7 @@ class ProfileView: UIView {
         gradient.frame = bounds
 
         let profileImageSize: CGFloat = bounds.height / 8
-        profileImageView.frame = CGRect(x: (bounds.width - profileImageSize) / 2, y: 16, width: profileImageSize, height: profileImageSize)
+        profileImageView.frame = CGRect(x: (bounds.width - profileImageSize) / 2, y: 24, width: profileImageSize, height: profileImageSize)
         profileImageView.layer.cornerRadius = profileImageSize / 2
         profileImageView.clipsToBounds = true
 
@@ -83,6 +92,9 @@ class ProfileView: UIView {
         
         let buttonWidth = bounds.width/2
         signOutButton.frame = CGRect(x: (bounds.width - buttonWidth) / 2, y: emailLabel.bottom + 50, width: bounds.width/2, height: profileImageSize / 3)
+        
+        aboutLabel.sizeToFit()
+        aboutLabel.frame = CGRect(x: width/16, y: (height*3)/4, width: bounds.width - 16, height: profileImageSize / 2)
     }
 }
 //MARK: - Selector
@@ -107,6 +119,7 @@ extension ProfileView {
         addSubview(usernameLabel)
         addSubview(emailLabel)
         addSubview(signOutButton)
+        addSubview(aboutLabel)
     }
     private func attributedTitle(headerTitle: String, title: String) -> NSMutableAttributedString {
         let attributed = NSMutableAttributedString(string: "\(headerTitle): ", attributes: [.foregroundColor: UIColor.white.withAlphaComponent(0.9), .font: UIFont.systemFont(ofSize: 16, weight: .bold)])
@@ -118,5 +131,8 @@ extension ProfileView {
         self.usernameLabel.attributedText = attributedTitle(headerTitle: "Username", title: "\(user.username)")
         self.nameLabel.attributedText = attributedTitle(headerTitle: "Name", title: "\(user.name)")
         self.emailLabel.attributedText = attributedTitle(headerTitle: "Email", title: "\(user.email)")
+        if let profileImageURL = user.profileImageUrl {
+            self.profileImageView.sd_setImage(with: URL(string: profileImageURL), completed: nil)
+        }
     }
 }

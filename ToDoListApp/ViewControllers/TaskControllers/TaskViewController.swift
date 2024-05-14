@@ -36,6 +36,10 @@ class TaskViewController: UIViewController {
         layout()
         fetchUser()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchTasks()
+    }
 }
 //MARK: - Service
 extension TaskViewController {

@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
         }
     }
     private let profileView = ProfileView()
-    private let homeView = HomeView()
+    public let homeView = HomeView()
     private var isProfileViewActive: Bool = false
     
     private lazy var profileButton: UIButton = {
@@ -40,11 +40,11 @@ class HomeViewController: UIViewController {
         layout()
         fetchUser()
         homeView.navigationController = navigationController
-        homeView.fetchLatestTask()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+        homeView.fetchLatestTask()
     }
 }
 //MARK: - Service

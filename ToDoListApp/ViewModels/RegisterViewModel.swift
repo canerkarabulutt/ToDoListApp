@@ -8,6 +8,7 @@
 import UIKit
 
 struct RegisterViewModel {
+    var profileImageUrl: URL? 
     var emailText: String?
     var passwordText: String?
     var nameText: String?

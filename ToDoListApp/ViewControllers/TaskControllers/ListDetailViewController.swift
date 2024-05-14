@@ -35,57 +35,6 @@ class ListDetailViewController: UIViewController {
         collectionView.frame = CGRect(x: 0, y: 0, width: view.width, height: view.height)
     }
 }
-//MARK: - Selector
-extension ListDetailViewController {
-    @objc private func didTapCheck() {
-        guard let task = task else { return }
-        
-        let alertController = UIAlertController(title: "Task Completed", message: "Are you sure you want to mark this task as completed?", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        let markCompletedAction = UIAlertAction(title: "Mark Completed", style: .default) { [weak self] _ in
-            TaskService.markTaskAsCompleted(task: task) { error in
-                if let error = error {
-                    print("Error marking task as completed: \(error.localizedDescription)")
-                } else {
-                    DispatchQueue.main.async {
-                        self?.delegate?.didDeleteTask()
-                        self?.navigationController?.popViewController(animated: true)
-                    }
-                }
-            }
-        }
-        alertController.addAction(markCompletedAction)
-        markCompletedAction.setValue(UIColor.purple, forKey: "titleTextColor")
-        cancelAction.setValue(UIColor.black, forKey: "titleTextColor")
-        present(alertController, animated: true)
-    }
-    @objc private func didTapTrash() {
-        let alertController = UIAlertController(title: "Delete", message: "Are you sure you want to delete this item?", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        let removeAction = UIAlertAction(title: "Remove", style: .destructive) { [weak self] _ in
-            self?.deleteItem()
-        }
-        alertController.addAction(removeAction)
-        removeAction.setValue(UIColor.purple, forKey: "titleTextColor")
-        cancelAction.setValue(UIColor.black, forKey: "titleTextColor")
-        present(alertController, animated: true)
-    }
-    private func deleteItem() {
-        guard let taskToDelete = task else { return }
-        TaskService.deleteTask(task: taskToDelete) { error in
-            if let error = error {
-                print("Error deleting task: \(error.localizedDescription)")
-            } else {
-                DispatchQueue.main.async {
-                    self.delegate?.didDeleteTask()
-                    self.navigationController?.popViewController(animated: true)
-                }
-            }
-        }
-    }
-}
 //MARK: - Helpers
 extension ListDetailViewController {
     private func style() {

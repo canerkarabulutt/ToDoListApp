@@ -26,7 +26,7 @@ class TaskCompletedView: UIDatePicker {
         let label = UILabel()
         label.text = "End Date:"
         label.textColor = .black
-        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -54,7 +54,7 @@ extension TaskCompletedView {
 
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8)
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 6)
         ])
     }
 }

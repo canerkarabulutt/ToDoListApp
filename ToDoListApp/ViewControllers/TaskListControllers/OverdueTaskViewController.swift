@@ -40,18 +40,8 @@ extension OverdueTaskViewController {
         let touchPoint = gesture.location(in: collectionView)
         guard let indexPath = collectionView.indexPathForItem(at: touchPoint) else { return }
         
-        let actionSheet = UIAlertController(title: "What action would you like to take?", message: nil, preferredStyle: .alert)
-        
-        let markAsCompletedAction = UIAlertAction(title: "Mark as Completed", style: .default) { [weak self] _ in
-            
-        }
-        actionSheet.addAction(markAsCompletedAction)
-        
-        let moveToPastAction = UIAlertAction(title: "Move to Past", style: .default) { [weak self] _ in
-            
-        }
-        actionSheet.addAction(moveToPastAction)
-        
+        let actionSheet = UIAlertController(title: "Remove", message: "Would you like to remove this task permanently?", preferredStyle: .actionSheet)
+
         let removeAction = UIAlertAction(title: "Remove Permanently", style: .destructive) { [weak self] _ in
             DispatchQueue.main.async {
                 self?.deleteOverdueTask(at: indexPath.row)
@@ -63,9 +53,7 @@ extension OverdueTaskViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
         
-        markAsCompletedAction.setValue(UIColor.purple, forKey: "titleTextColor")
         removeAction.setValue(UIColor.purple, forKey: "titleTextColor")
-        moveToPastAction.setValue(UIColor.purple, forKey: "titleTextColor")
         cancelAction.setValue(UIColor.black, forKey: "titleTextColor")
         present(actionSheet, animated: true, completion: nil)
     }
@@ -76,7 +64,6 @@ extension OverdueTaskViewController {
             self.sortTasksByStartDate()
         }
         alertController.addAction(sortByStartDateAction)
-        
         
         let sortByHeaderAction = UIAlertAction(title: "Sort by A-Z", style: .default) { _ in
             self.sortTasksByHeader()
@@ -105,19 +92,6 @@ extension OverdueTaskViewController {
         }
     }
     private func deleteOverdueTask(at index: Int) {
-        let taskToDelete = overdueTasks[index]
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("tasks").document(uid).collection("overdue_tasks").document(taskToDelete.taskId).delete { error in
-            if let error = error {
-                print("Error removing document: \(error)")
-            } else {
-                print("Document successfully removed from Firestore!")
-                self.overdueTasks.remove(at: index)
-                self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
-            }
-        }
-    }
-    private func markOverdueTask(at index: Int) {
         let taskToDelete = overdueTasks[index]
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("tasks").document(uid).collection("overdue_tasks").document(taskToDelete.taskId).delete { error in

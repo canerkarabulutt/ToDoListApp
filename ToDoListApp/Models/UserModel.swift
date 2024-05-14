@@ -10,7 +10,7 @@ import Foundation
 struct UserModel {
     let email: String
     let name: String
-    let profileImageUrl: String
+    let profileImageUrl: String?
     let uid: String
     let username: String
     

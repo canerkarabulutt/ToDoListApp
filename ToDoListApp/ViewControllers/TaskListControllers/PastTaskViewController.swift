@@ -27,7 +27,7 @@ class PastTaskViewController: UIViewController {
         style()
         fetchPastTasks()
         setupLongPressGesture()
-        addSortButton()
+        actionButtons()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -78,6 +78,20 @@ extension PastTaskViewController {
 
         present(alertController, animated: true, completion: nil)
     }
+    @objc private func deleteAllTasksTapped() {
+        let alertController = UIAlertController(title: "Delete All", message: "Are you sure you want to delete all past tasks?", preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            self.deleteAllPastTasks()
+        }
+        alertController.addAction(deleteAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        deleteAction.setValue(UIColor.purple, forKey: "titleTextColor")
+        cancelAction.setValue(UIColor.black, forKey: "titleTextColor")
+        present(alertController, animated: true, completion: nil)
+    }
+
 }
 //MARK: - Service
 extension PastTaskViewController {
@@ -119,10 +133,14 @@ extension PastTaskViewController {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         collectionView.addGestureRecognizer(longPressGesture)
     }
-    private func addSortButton() {
+    private func actionButtons() {
         let sortButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .plain, target: self, action: #selector(sortOptionsTapped))
         navigationItem.rightBarButtonItem = sortButton
+        let deleteAllButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(deleteAllTasksTapped))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        navigationItem.rightBarButtonItems = [sortButton, flexibleSpace, deleteAllButton]
     }
+
 }
 //MARK: - UICollectionViewDelegate & UICollectionViewDataSource
 extension PastTaskViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -153,4 +171,27 @@ extension PastTaskViewController {
         pastTasks.sort { $0.header.lowercased() < $1.header.lowercased() }
         collectionView.reloadData()
     }
+}
+//MARK: - All
+extension PastTaskViewController {
+    private func deleteAllPastTasks() {
+        guard !pastTasks.isEmpty else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let batch = Firestore.firestore().batch()
+        for task in pastTasks {
+            let taskRef = Firestore.firestore().collection("tasks").document(uid).collection("deleted_tasks").document(task.taskId)
+            batch.deleteDocument(taskRef)
+        }
+        batch.commit { error in
+            if let error = error {
+                print("Error deleting documents: \(error)")
+            } else {
+                print("All documents successfully deleted!")
+                self.pastTasks.removeAll()
+                self.collectionView.reloadData()
+            }
+        }
+    }
+
 }

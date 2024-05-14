@@ -37,7 +37,8 @@ class CurrentTaskTableViewCell: UITableViewCell {
     private let taskHeaderLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .semibold)
-        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.numberOfLines = 1
         return label
     }()
     private let calendarLabel: UILabel = {
@@ -118,7 +119,8 @@ extension CurrentTaskTableViewCell {
             calendarLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
             
             taskHeaderLabel.topAnchor.constraint(equalTo: calendarLabel.bottomAnchor, constant: 4),
-            taskHeaderLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -4),
+            taskHeaderLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4),
+            taskHeaderLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -4),
             
             separatorView.leadingAnchor.constraint(equalTo: leadingAnchor),
             separatorView.trailingAnchor.constraint(equalTo: trailingAnchor),

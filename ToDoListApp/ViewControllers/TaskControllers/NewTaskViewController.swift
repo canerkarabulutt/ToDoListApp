@@ -18,18 +18,12 @@ class NewTaskViewController: UIViewController {
     }()
     private let calendarView: CalendarView = {
         let calendar = CalendarView()
-        calendar.layer.cornerRadius = 12
-        calendar.layer.borderWidth = 3
-        calendar.layer.borderColor = UIColor.mainColor.cgColor
-        calendar.clipsToBounds = true
+        calendar.calendarLayerStyle()
         return calendar
     }()
     private let endDatePicker: TaskCompletedView = {
         let calendar = TaskCompletedView()
-        calendar.layer.cornerRadius = 12
-        calendar.layer.borderWidth = 3
-        calendar.layer.borderColor = UIColor.mainColor.cgColor
-        calendar.clipsToBounds = true
+        calendar.calendarLayerStyle()
         return calendar
     }()
     private let taskHeaderView: InputTextView = {
@@ -96,7 +90,7 @@ extension NewTaskViewController {
     private func style() {
         secondBackgroundGradientColor()
         view.layer.borderWidth = 2
-        view.layer.cornerRadius = 16
+        view.layer.cornerRadius = 24
         view.layer.borderColor = UIColor.mainColor.cgColor
         view.layer.masksToBounds = true
         

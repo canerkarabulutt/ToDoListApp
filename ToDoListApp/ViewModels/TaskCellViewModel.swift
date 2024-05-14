@@ -42,7 +42,7 @@ extension TaskCellViewModel {
             dateFormatter.locale = Locale(identifier: "en_US")
             dateFormatter.dateFormat = "MMM dd, yyyy"
             let endDateString = dateFormatter.string(from: endDate)
-            self.endDateLabelText = "\u{2705}End Date: \(endDateString)"
+            self.endDateLabelText = "\u{23F3}End Date: \(endDateString)"
             
             self.isExpired = endDate < Date()
         } else {

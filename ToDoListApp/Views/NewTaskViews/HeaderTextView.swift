@@ -40,7 +40,7 @@ extension HeaderTextView {
 extension HeaderTextView {
     private func style() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleTextView), name: UITextView.textDidChangeNotification, object: nil)
-        
+
         headerPlaceHolder.translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .white
         font = .systemFont(ofSize: 16, weight: .regular)

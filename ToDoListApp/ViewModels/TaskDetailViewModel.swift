@@ -43,7 +43,7 @@ class TaskDetailViewModel {
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale(identifier: "en_US")
             dateFormatter.dateFormat = "MMM dd, yyyy"
-            return "\u{2705}End Date: \(dateFormatter.string(from: endDate))"
+            return "\u{23F3}End Date: \(dateFormatter.string(from: endDate))"
         } else {
             return "No end date"
         }

@@ -45,7 +45,7 @@ extension LatesTaskViewModel {
             dateFormatter.locale = Locale(identifier: "en_US")
             dateFormatter.dateFormat = "MMM dd, yyyy"
             let endDateString = dateFormatter.string(from: endDate)
-            self.endDateLabelText = "\u{2705}\(endDateString)"
+            self.endDateLabelText = "\u{23F3}\(endDateString)"
             
             self.isExpired = endDate < Date()
         } else {

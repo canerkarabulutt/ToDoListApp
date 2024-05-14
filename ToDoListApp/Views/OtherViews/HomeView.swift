@@ -23,7 +23,7 @@ class HomeView: UIView {
     private lazy var listButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "text.badge.checkmark"), for: .normal)
-        button.setTitle("Lists", for: .normal)
+        button.setTitle("Task Lists ", for: .normal)
         button.homeButtonConfiguration()
         button.addTarget(self, action: #selector(handleTaskListButton), for: .touchUpInside)
         return button
@@ -52,7 +52,6 @@ class HomeView: UIView {
         style()
         layout()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -84,7 +83,6 @@ extension HomeView {
         stackView.spacing = 32
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
-
         latestTaskView.translatesAutoresizingMaskIntoConstraints = false
     }
     private func layout() {
@@ -110,7 +108,7 @@ extension HomeView {
             if let latestTask = tasks.first {
                 let viewModel = LatesTaskViewModel(task: latestTask)
                 self.latestTaskView.latestTaskHeader.text = viewModel.taskHeader
-                self.latestTaskView.latestTaskLabel.text = viewModel.taskLabel
+                self.latestTaskView.endDateLabel.text = viewModel.endDateLabelText
                 self.latestTaskView.calendarLabel.text = viewModel.calendarLabelText
             }
         }

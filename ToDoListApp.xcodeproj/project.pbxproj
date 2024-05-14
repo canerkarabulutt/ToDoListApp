@@ -30,6 +30,7 @@
 		2B1058E12BECDB11008595FB /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058E02BECDB11008595FB /* SearchCollectionViewCell.swift */; };
 		2B1058E32BEE3925008595FB /* LatestTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058E22BEE3925008595FB /* LatestTaskView.swift */; };
 		2B1058E52BEE3F7B008595FB /* LatesTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1058E42BEE3F7B008595FB /* LatesTaskViewModel.swift */; };
+		2B1058EA2BF37CA6008595FB /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2B1058E92BF37CA6008595FB /* SDWebImage */; };
 		2B850EE02BCFD5DE0064B3C0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2B850EDF2BCFD5DE0064B3C0 /* FirebaseAuth */; };
 		2B850EE22BCFD5E40064B3C0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2B850EE12BCFD5E40064B3C0 /* FirebaseFirestore */; };
 		2B850EE42BCFD5EA0064B3C0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2B850EE32BCFD5EA0064B3C0 /* FirebaseStorage */; };
@@ -141,6 +142,7 @@
 				2B850EE02BCFD5DE0064B3C0 /* FirebaseAuth in Frameworks */,
 				2B850EE22BCFD5E40064B3C0 /* FirebaseFirestore in Frameworks */,
 				2B850EE42BCFD5EA0064B3C0 /* FirebaseStorage in Frameworks */,
+				2B1058EA2BF37CA6008595FB /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +371,7 @@
 				2B850EE12BCFD5E40064B3C0 /* FirebaseFirestore */,
 				2B850EE32BCFD5EA0064B3C0 /* FirebaseStorage */,
 				2B1058AA2BE3A6E2008595FB /* DGCharts */,
+				2B1058E92BF37CA6008595FB /* SDWebImage */,
 			);
 			productName = ToDoListApp;
 			productReference = 2B1DB4C42BAD865B0040DF54 /* ToDoListApp.app */;
@@ -401,6 +404,7 @@
 			packageReferences = (
 				2B850EDD2BCFD2F70064B3C0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				2B1058A52BE3A5FB008595FB /* XCRemoteSwiftPackageReference "Charts" */,
+				2B1058E82BF37CA6008595FB /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 2B1DB4C52BAD865B0040DF54 /* Products */;
 			projectDirPath = "";
@@ -700,6 +704,14 @@
 				minimumVersion = 5.1.0;
 			};
 		};
+		2B1058E82BF37CA6008595FB /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.19.2;
+			};
+		};
 		2B850EDD2BCFD2F70064B3C0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -715,6 +727,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2B1058A52BE3A5FB008595FB /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
+		};
+		2B1058E92BF37CA6008595FB /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B1058E82BF37CA6008595FB /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 		2B850EDF2BCFD5DE0064B3C0 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
