@@ -111,7 +111,6 @@ extension PastTaskViewController {
             if let error = error {
                 print("Error removing document: \(error)")
             } else {
-                print("Document successfully removed from Firestore!")
                 self.pastTasks.remove(at: index)
                 self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
             }
@@ -187,7 +186,6 @@ extension PastTaskViewController {
             if let error = error {
                 print("Error deleting documents: \(error)")
             } else {
-                print("All documents successfully deleted!")
                 self.pastTasks.removeAll()
                 self.collectionView.reloadData()
             }

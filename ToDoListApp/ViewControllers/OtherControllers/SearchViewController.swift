@@ -27,6 +27,14 @@ class SearchViewController: UIViewController {
         searchController.definesPresentationContext = true
         return searchController
     }()
+    private let infoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "🔍 Find your task quickly! 🔍"
+        label.textColor = .black
+        label.textAlignment = .center
+        return label
+    }()
+
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +44,9 @@ class SearchViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
+        let width: CGFloat = (view.width*3)/4
+        let height: CGFloat = view.height/8
+        infoLabel.frame = CGRect(x: (view.bounds.width - width) / 2,y: (view.bounds.height - height) / 2, width: width,height: height)
     }
 }
 //MARK: - Helpers
@@ -56,6 +67,7 @@ extension SearchViewController {
         collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.cellIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
+        view.addSubview(infoLabel)
     }
 }
 //MARK: - UICollectionViewDelegate & UICollectionViewDataSource
@@ -84,8 +96,10 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let query = searchController.searchBar.text, !query.isEmpty {
+            infoLabel.isHidden = true
             fetchSearchResults(for: query)
         } else {
+            infoLabel.isHidden = false
             results.removeAll()
             collectionView.reloadData()
         }

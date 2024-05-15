@@ -98,7 +98,6 @@ extension OverdueTaskViewController {
             if let error = error {
                 print("Error removing document: \(error)")
             } else {
-                print("Document successfully removed from Firestore!")
                 self.overdueTasks.remove(at: index)
                 self.collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
             }
