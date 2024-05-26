@@ -52,6 +52,7 @@
 ## * MVVM 
 ## * MVC 
 ## * Modern Collection Views
+## * Firebase
 ## * SDWebImage
 ## * StoreKit
 ## * RestfulAPI
