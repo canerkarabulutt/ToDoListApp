@@ -2,10 +2,10 @@
 
 ## Auth - Home - Profile 
 
-<img src="https://github.com/canerkarabulutt/ToDoListApp/assets/152221111/eea9a3ae-f61e-4756-a502-c8841e7d688f" alt="Auth" width="225" height="500">
-<img src="https://github.com/canerkarabulutt/ToDoListApp/assets/152221111/dc3e8d01-ee77-4592-95bf-d3595279547a" alt="Auth" width="225" height="500">
-<img src="https://github.com/canerkarabulutt/ToDoListApp/assets/152221111/60fcab37-748b-4340-8534-e82540200dd1" alt="Home" width="225" height="500">
-<img src="https://github.com/canerkarabulutt/ToDoListApp/assets/152221111/4c30007d-4ae7-4878-8b43-14e56f7cc1d4" alt="Profile" width="225" height="500">
+<img src="https://github.com/canerkarabulutt/ToDoListApp/assets/152221111/eea9a3ae-f61e-4756-a502-c8841e7d688f" alt="Auth" width="200" height="450">
+<img src="https://github.com/canerkarabulutt/ToDoListApp/assets/152221111/dc3e8d01-ee77-4592-95bf-d3595279547a" alt="Auth" width="200" height="450">
+<img src="https://github.com/canerkarabulutt/ToDoListApp/assets/152221111/60fcab37-748b-4340-8534-e82540200dd1" alt="Home" width="200" height="450">
+<img src="https://github.com/canerkarabulutt/ToDoListApp/assets/152221111/4c30007d-4ae7-4878-8b43-14e56f7cc1d4" alt="Profile" width="200" height="450">
 
 
 
